@@ -60,6 +60,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.consoleRichTextBox = new System.Windows.Forms.RichTextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -72,8 +73,8 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.consoleRichTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -134,6 +135,7 @@
             this.toolStripLabel1,
             this.toolStripComboBoxPath,
             this.toolStripButton1,
+            this.toolStripSeparator2,
             this.toolStripButton2,
             this.toolStripSeparator1,
             this.toolStripButton3,
@@ -413,6 +415,18 @@
             this.panel8.Size = new System.Drawing.Size(1000, 279);
             this.panel8.TabIndex = 4;
             // 
+            // consoleRichTextBox
+            // 
+            this.consoleRichTextBox.BackColor = System.Drawing.Color.White;
+            this.consoleRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.consoleRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.consoleRichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.consoleRichTextBox.Name = "consoleRichTextBox";
+            this.consoleRichTextBox.ReadOnly = true;
+            this.consoleRichTextBox.Size = new System.Drawing.Size(998, 277);
+            this.consoleRichTextBox.TabIndex = 0;
+            this.consoleRichTextBox.Text = "";
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.panel6);
@@ -527,21 +541,15 @@
             this.imageList1.Images.SetKeyName(3, "bullet_error.png");
             this.imageList1.Images.SetKeyName(4, "bullet_red.png");
             // 
-            // consoleRichTextBox
-            // 
-            this.consoleRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.consoleRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.consoleRichTextBox.Location = new System.Drawing.Point(0, 0);
-            this.consoleRichTextBox.Name = "consoleRichTextBox";
-            this.consoleRichTextBox.ReadOnly = true;
-            this.consoleRichTextBox.Size = new System.Drawing.Size(998, 277);
-            this.consoleRichTextBox.TabIndex = 0;
-            this.consoleRichTextBox.Text = "";
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "*.xml|*.xml";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // Form1
             // 
@@ -632,6 +640,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.RichTextBox consoleRichTextBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

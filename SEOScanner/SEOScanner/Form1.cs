@@ -21,29 +21,16 @@ namespace SEOScanner
         }
 
         private Thread thread;
-
-        private void addConsoleMessage(string message)
-        {
-            DateTime localDate = DateTime.Now;
-            consoleRichTextBox.Text = "[" + localDate.ToString() + "]: " + message + Environment.NewLine + consoleRichTextBox.Text;
-        }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             thread = new Thread(loadSitemap);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void addConsoleMessage(string message)
         {
-            if (checkBoxUserAgent.Checked == true)
-            {
-                textBoxUserAgent.ReadOnly = true;
-                textBoxUserAgent.Text = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.202 Safari/535.1";
-            }
-            else
-            {
-                textBoxUserAgent.ReadOnly = false;
-            }
+            DateTime localDate = DateTime.Now;
+            consoleRichTextBox.Text = "[" + localDate.ToString() + "]: " + message + Environment.NewLine + consoleRichTextBox.Text;
         }
 
         /* Остановить процесс */
@@ -121,11 +108,53 @@ namespace SEOScanner
             {
                 addConsoleMessage("Сообщение: " + error.Message);
             }
+            finally
+            {
+                thread.Abort();
+                addConsoleMessage("Процесс завершен");
+                MessageBox.Show("Процесс завершен!");
+            }
+
+            thread.Abort();
         }
 
+        private void scanner()
+        {
+            try
+            {
+
+
+
+                addConsoleMessage("Сканирование страниц - завершено");
+            }
+            catch (Exception error)
+            {
+                addConsoleMessage("Сообщение: " + error.Message);
+            }
+            finally
+            {
+                thread.Abort();
+                addConsoleMessage("Процесс завершен");
+                MessageBox.Show("Процесс завершен!");
+            }
+
+            thread.Abort();
+        }
         /* ------------------------------------------------------------------------------------------- */
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxUserAgent.Checked == true)
+            {
+                textBoxUserAgent.ReadOnly = true;
+                textBoxUserAgent.Text = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.202 Safari/535.1";
+            }
+            else
+            {
+                textBoxUserAgent.ReadOnly = false;
+            }
+        }
+            private void toolStripButton2_Click(object sender, EventArgs e)
         {
             if (thread.ThreadState.ToString() == "Running")
             {
