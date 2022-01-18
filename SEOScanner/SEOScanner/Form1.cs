@@ -24,12 +24,13 @@ namespace SEOScanner
 
         private void addConsoleMessage(string message)
         {
-            consoleRichTextBox.Text = message + Environment.NewLine + consoleRichTextBox.Text;
+            DateTime localDate = DateTime.Now;
+            consoleRichTextBox.Text = "[" + localDate.ToString() + "]: " + message + Environment.NewLine + consoleRichTextBox.Text;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            thread = new Thread(loadSitemap);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -45,8 +46,31 @@ namespace SEOScanner
             }
         }
 
+        /* Остановить процесс */
+        private void stopProcess()
+        {
+            if (thread.ThreadState.ToString() == "Unstarted")
+            {
+                MessageBox.Show("Процесс еще не запущен");
+                return;
+            }
+
+            addConsoleMessage("Процесс прерван пользователем");
+            try
+            {
+                thread.Abort();
+                addConsoleMessage("Процесс завершен");
+                MessageBox.Show("Процесс завершен!");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+                addConsoleMessage("Сообщение: " + error.Message);
+            }
+        }
+
         /* Загрузка ссылок из карты сайта */
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void loadSitemap()
         {
             try
             {
@@ -88,13 +112,29 @@ namespace SEOScanner
                 foreach (string target in targets)
                 {
                     richTextBoxListLinks.Text = target + Environment.NewLine + richTextBoxListLinks.Text;
+                    richTextBoxListLinks.Update();
                 }
 
+                addConsoleMessage("Выгрузка ссылок из sitemap - завершена");
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 addConsoleMessage("Сообщение: " + error.Message);
             }
+        }
+
+        /* ------------------------------------------------------------------------------------------- */
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (thread.ThreadState.ToString() == "Running")
+            {
+                MessageBox.Show("Процесс занят дождитесь завершения или прекратите процесс вручную.");
+                return;
+            }
+            richTextBoxListLinks.Clear();
+            thread = new Thread(loadSitemap);
+            thread.Start();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -103,6 +143,11 @@ namespace SEOScanner
             {
                 toolStripComboBoxPath.Text = openFileDialog1.FileName;
             }
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            stopProcess();
         }
     }
 }

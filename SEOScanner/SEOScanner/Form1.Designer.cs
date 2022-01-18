@@ -153,10 +153,11 @@
             // toolStripComboBoxPath
             // 
             this.toolStripComboBoxPath.Items.AddRange(new object[] {
-            "https://site.com/sitemap.xml",
-            "https://somovstudio.github.io/sitemap.xml"});
+            "https://somovstudio.github.io/sitemap.xml",
+            "https://mgts.ru/sitemap.xml"});
             this.toolStripComboBoxPath.Name = "toolStripComboBoxPath";
             this.toolStripComboBoxPath.Size = new System.Drawing.Size(250, 25);
+            this.toolStripComboBoxPath.Text = "https://site.com/sitemap.xml";
             // 
             // toolStripButton1
             // 
@@ -197,6 +198,7 @@
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(91, 22);
             this.toolStripButton4.Text = "Остановить";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // splitContainer1
             // 
@@ -531,6 +533,7 @@
             this.consoleRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.consoleRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.consoleRichTextBox.Name = "consoleRichTextBox";
+            this.consoleRichTextBox.ReadOnly = true;
             this.consoleRichTextBox.Size = new System.Drawing.Size(998, 277);
             this.consoleRichTextBox.TabIndex = 0;
             this.consoleRichTextBox.Text = "";
