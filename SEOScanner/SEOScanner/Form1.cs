@@ -126,11 +126,27 @@ namespace SEOScanner
         {
             try
             {
+                int percent = 0;
                 int amount = richTextBoxListLinks.Lines.Length;
+                toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
+                toolStripProgressBar1.Maximum = amount;
+
                 for (int i = 0; i < amount; i++)
                 {
                     string url = richTextBoxListLinks.Lines[i];
-                    addConsoleMessage("Просканировано " + (i+1).ToString() + " из " + amount.ToString() + " страниц " + url);
+                    string page;
+                    if (checkBoxUserAgent.Checked == false) page = Sitemap.getPageHtmlDOM(url, textBoxUserAgent.Text);
+                    else page = Sitemap.getPageHtmlDOM(url, "");
+
+                    
+
+
+
+
+                    toolStripProgressBar1.Value = i+1;
+                    percent = (int)(((double)toolStripProgressBar1.Value / (double)toolStripProgressBar1.Maximum) * 100);
+                    toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
+                    addConsoleMessage("Просканировано " + (i + 1).ToString() + " из " + amount.ToString() + " страниц " + url);
                 }
 
 
@@ -195,6 +211,8 @@ namespace SEOScanner
                 MessageBox.Show("Процесс занят! Дождитесь завершения или прекратите текущий процесс вручную.");
                 return;
             }
+            toolStripStatusLabelProcessPercent.Text = "...";
+            toolStripProgressBar1.Value = 0;
             thread = new Thread(scanner);
             thread.Start();
         }

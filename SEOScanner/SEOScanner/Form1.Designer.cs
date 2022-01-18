@@ -47,6 +47,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -75,7 +76,9 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label4 = new System.Windows.Forms.Label();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelProcessPercent = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -117,7 +120,10 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.toolStripProgressBar1,
+            this.toolStripStatusLabelProcessPercent});
             this.statusStrip1.Location = new System.Drawing.Point(0, 707);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1008, 22);
@@ -261,6 +267,19 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1000, 18);
             this.panel2.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label4.Location = new System.Drawing.Point(174, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(825, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Загружено 0 / 0 ссылок";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel1
             // 
@@ -554,18 +573,24 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "*.xml|*.xml";
             // 
-            // label4
+            // toolStripStatusLabel2
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label4.Location = new System.Drawing.Point(174, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(825, 15);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Загружено 0 / 0 ссылок";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolStripStatusLabel2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel2.Text = "|";
+            // 
+            // toolStripStatusLabelProcessPercent
+            // 
+            this.toolStripStatusLabelProcessPercent.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabelProcessPercent.Name = "toolStripStatusLabelProcessPercent";
+            this.toolStripStatusLabelProcessPercent.Size = new System.Drawing.Size(16, 17);
+            this.toolStripStatusLabelProcessPercent.Text = "...";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
             // 
             // Form1
             // 
@@ -658,6 +683,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProcessPercent;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
     }
 }
 
