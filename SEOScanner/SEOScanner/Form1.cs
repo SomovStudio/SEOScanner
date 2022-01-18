@@ -96,10 +96,14 @@ namespace SEOScanner
                 addConsoleMessage("Было прочитано: " + sitemaps.Count.ToString() + " xml файлов (sitemap)");
                 addConsoleMessage("Было получено " + targets.Count.ToString() + " ссылок");
 
+                int index = 1;
+                int amount = targets.Count;
                 foreach (string target in targets)
                 {
                     richTextBoxListLinks.Text = target + Environment.NewLine + richTextBoxListLinks.Text;
                     richTextBoxListLinks.Update();
+                    label4.Text = "Загружено " + index.ToString() + " / " + amount.ToString() + " ссылок";
+                    index++;
                 }
 
                 addConsoleMessage("Выгрузка ссылок из sitemap - завершена");
@@ -122,7 +126,12 @@ namespace SEOScanner
         {
             try
             {
-
+                int amount = richTextBoxListLinks.Lines.Length;
+                for (int i = 0; i < amount; i++)
+                {
+                    string url = richTextBoxListLinks.Lines[i];
+                    addConsoleMessage("Просканировано " + (i+1).ToString() + " из " + amount.ToString() + " страниц " + url);
+                }
 
 
                 addConsoleMessage("Сканирование страниц - завершено");
@@ -154,11 +163,11 @@ namespace SEOScanner
                 textBoxUserAgent.ReadOnly = false;
             }
         }
-            private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
             if (thread.ThreadState.ToString() == "Running")
             {
-                MessageBox.Show("Процесс занят дождитесь завершения или прекратите процесс вручную.");
+                MessageBox.Show("Процесс занят! Дождитесь завершения или прекратите текущий процесс вручную.");
                 return;
             }
             richTextBoxListLinks.Clear();
@@ -177,6 +186,17 @@ namespace SEOScanner
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             stopProcess();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            if (thread.ThreadState.ToString() == "Running")
+            {
+                MessageBox.Show("Процесс занят! Дождитесь завершения или прекратите текущий процесс вручную.");
+                return;
+            }
+            thread = new Thread(scanner);
+            thread.Start();
         }
     }
 }
