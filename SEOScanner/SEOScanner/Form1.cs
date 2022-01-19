@@ -138,7 +138,8 @@ namespace SEOScanner
                     if (checkBoxUserAgent.Checked == false) page = Sitemap.getPageHtmlDOM(url, textBoxUserAgent.Text);
                     else page = Sitemap.getPageHtmlDOM(url, "");
 
-                    
+                    webBrowser1.ScriptErrorsSuppressed = true;
+                    webBrowser1.Navigate(url);
 
 
 
