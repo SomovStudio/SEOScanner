@@ -21,6 +21,8 @@ namespace SEOScanner
         }
 
         private Thread thread;
+        private int steps, step, percent;
+        private string currentURL;
         
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -124,10 +126,6 @@ namespace SEOScanner
 
         private void scanner()
         {
-            webBrowser1.ScriptErrorsSuppressed = true;
-            //webBrowser1.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
-            webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
-
             try
             {
                 int percent = 0;
@@ -170,11 +168,38 @@ namespace SEOScanner
 
             thread.Abort();
         }
+
+        private void runScanner()
+        {
+            try
+            {
+                currentURL = richTextBoxListLinks.Lines[step];
+                
+                string page;
+                if (checkBoxUserAgent.Checked == false) page = Sitemap.getPageHtmlDOM(currentURL, textBoxUserAgent.Text);
+                else page = Sitemap.getPageHtmlDOM(currentURL, "");
+
+                //webBrowser1.Navigate(currentURL);
+                webBrowser1.DocumentText = page;
+            }
+            catch (Exception error)
+            {
+                addConsoleMessage("Сообщение: " + error.Message);
+            }
+            finally
+            {
+                thread.Abort();
+                addConsoleMessage("Процесс завершен");
+                MessageBox.Show("Процесс завершен!");
+            }
+        }
+
+
         /* ------------------------------------------------------------------------------------------- */
 
+        /*
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            /*
             HtmlDocument document = this.webBrowser1.Document;
             if (document != null && document.All["userName"] != null && String.IsNullOrEmpty(document.All["userName"].GetAttribute("value")))
             {
@@ -182,17 +207,9 @@ namespace SEOScanner
                 addConsoleMessage(e.Url.ToString());
                 MessageBox.Show("You must enter your name before you can navigate to " + e.Url.ToString());
             }
-            */
         }
+        */
 
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            HtmlDocument document = this.webBrowser1.Document;
-            //HtmlElement hElement = document.GetElementsByTagName("h1")[0];
-            addConsoleMessage("Количество тэгов H2 на странице = " + document.GetElementsByTagName("h2").Count.ToString());
-        }
-
-        
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxUserAgent.Checked == true)
@@ -237,10 +254,48 @@ namespace SEOScanner
                 MessageBox.Show("Процесс занят! Дождитесь завершения или прекратите текущий процесс вручную.");
                 return;
             }
+
+            steps = richTextBoxListLinks.Lines.Length;
+            step = 0;
+            percent = 0;
+
             toolStripStatusLabelProcessPercent.Text = "...";
-            toolStripProgressBar1.Value = 0;
-            thread = new Thread(scanner);
+            toolStripProgressBar1.Value = step;
+            toolStripProgressBar1.Maximum = steps;
+            toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
+
+            webBrowser1.ScriptErrorsSuppressed = true;
+            
+            thread = new Thread(runScanner);
             thread.Start();
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            step++;
+            thread.Abort();
+            Thread.Sleep(2000);
+
+            webBrowser1.Update();
+            HtmlDocument document = webBrowser1.Document;
+            //HtmlElement hElement = document.GetElementsByTagName("h1")[0];
+            addConsoleMessage("Количество тэгов H2 на странице = " + document.GetElementsByTagName("h2").Count.ToString());
+
+            percent = (int)(((double)toolStripProgressBar1.Value / (double)toolStripProgressBar1.Maximum) * 100);
+            addConsoleMessage("Просканировано " + step.ToString() + " из " + steps.ToString() + " страниц " + currentURL);
+            toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
+            toolStripProgressBar1.Value = step;
+
+            if (step == steps)
+            {
+                addConsoleMessage("Сканирование страниц - завершено");
+            }
+            else
+            {
+                thread = new Thread(runScanner);
+                thread.Start();
+            }
+            
         }
     }
 }
