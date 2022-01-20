@@ -124,6 +124,10 @@ namespace SEOScanner
 
         private void scanner()
         {
+            webBrowser1.ScriptErrorsSuppressed = true;
+            //webBrowser1.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
+            webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
+
             try
             {
                 int percent = 0;
@@ -138,9 +142,9 @@ namespace SEOScanner
                     if (checkBoxUserAgent.Checked == false) page = Sitemap.getPageHtmlDOM(url, textBoxUserAgent.Text);
                     else page = Sitemap.getPageHtmlDOM(url, "");
 
-                    webBrowser1.ScriptErrorsSuppressed = true;
-                    webBrowser1.Navigate(url);
-
+                    //webBrowser1.Navigate(url);
+                    webBrowser1.DocumentText = page;
+                    
 
 
 
@@ -168,6 +172,27 @@ namespace SEOScanner
         }
         /* ------------------------------------------------------------------------------------------- */
 
+        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            /*
+            HtmlDocument document = this.webBrowser1.Document;
+            if (document != null && document.All["userName"] != null && String.IsNullOrEmpty(document.All["userName"].GetAttribute("value")))
+            {
+                e.Cancel = true;
+                addConsoleMessage(e.Url.ToString());
+                MessageBox.Show("You must enter your name before you can navigate to " + e.Url.ToString());
+            }
+            */
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            HtmlDocument document = this.webBrowser1.Document;
+            //HtmlElement hElement = document.GetElementsByTagName("h1")[0];
+            addConsoleMessage("Количество тэгов H2 на странице = " + document.GetElementsByTagName("h2").Count.ToString());
+        }
+
+        
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxUserAgent.Checked == true)
