@@ -272,7 +272,9 @@ namespace SEOScanner
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            
+            if (webBrowser1.ReadyState != WebBrowserReadyState.Complete) return;
+            if (e.Url.AbsolutePath != (sender as WebBrowser).Url.AbsolutePath) return;
+
             thread.Abort();
             Thread.Sleep(1000);
 
