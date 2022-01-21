@@ -70,7 +70,7 @@ namespace SEOScanner
 
         public static string getPageHtmlDOM(string url, string userAgent)
         {
-            string html;
+            string html = "";
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             //ServicePointManager.SecurityProtocol =  SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
@@ -80,6 +80,22 @@ namespace SEOScanner
                 web.Encoding = Encoding.UTF8;
                 if (userAgent != "") web.Headers.Add("user-agent", userAgent);
                 html = web.DownloadString(url);
+
+                /*
+                try
+                {
+                    html = web.DownloadString(url);
+                }
+                catch (WebException ex)
+                {
+                    if (ex.Status == WebExceptionStatus.ProtocolError && ex.Response != null)
+                    {
+                        var resp = (HttpWebResponse)ex.Response;
+                        html = resp.StatusCode.ToString();
+                        if (resp.StatusCode == HttpStatusCode.NotFound) { } // HTTP 404
+                    }
+                }
+                */
             }
             return html;
         }

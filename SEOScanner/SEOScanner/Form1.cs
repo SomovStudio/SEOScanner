@@ -33,6 +33,7 @@ namespace SEOScanner
         {
             DateTime localDate = DateTime.Now;
             consoleRichTextBox.Text = "[" + localDate.ToString() + "]: " + message + Environment.NewLine + consoleRichTextBox.Text;
+            consoleRichTextBox.Update();
         }
 
         /* Остановить процесс */
@@ -171,27 +172,25 @@ namespace SEOScanner
 
         private void runScanner()
         {
+            currentURL = richTextBoxListLinks.Lines[step];
+            step++;
+
+            string page = "";
             try
             {
-                currentURL = richTextBoxListLinks.Lines[step];
-                
-                string page;
                 if (checkBoxUserAgent.Checked == false) page = Sitemap.getPageHtmlDOM(currentURL, textBoxUserAgent.Text);
                 else page = Sitemap.getPageHtmlDOM(currentURL, "");
-
-                //webBrowser1.Navigate(currentURL);
-                webBrowser1.DocumentText = page;
             }
             catch (Exception error)
             {
-                addConsoleMessage("Сообщение: " + error.Message);
+                addConsoleMessage("Ошибка: " + error.Message);
+                addConsoleMessage("Ошибка чтения странирцы " + currentURL);
             }
-            finally
-            {
-                thread.Abort();
-                addConsoleMessage("Процесс завершен");
-                MessageBox.Show("Процесс завершен!");
-            }
+
+            //webBrowser1.Navigate(currentURL);
+            webBrowser1.DocumentText = page;
+
+            thread.Abort();
         }
 
 
@@ -236,6 +235,7 @@ namespace SEOScanner
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            openFileDialog1.FileName = "";
             if(openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 toolStripComboBoxPath.Text = openFileDialog1.FileName;
@@ -272,23 +272,25 @@ namespace SEOScanner
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            step++;
+            
             thread.Abort();
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
 
             webBrowser1.Update();
             HtmlDocument document = webBrowser1.Document;
             //HtmlElement hElement = document.GetElementsByTagName("h1")[0];
             addConsoleMessage("Количество тэгов H2 на странице = " + document.GetElementsByTagName("h2").Count.ToString());
 
+            toolStripProgressBar1.Value = step;
             percent = (int)(((double)toolStripProgressBar1.Value / (double)toolStripProgressBar1.Maximum) * 100);
             addConsoleMessage("Просканировано " + step.ToString() + " из " + steps.ToString() + " страниц " + currentURL);
             toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
-            toolStripProgressBar1.Value = step;
+            
 
             if (step == steps)
             {
                 addConsoleMessage("Сканирование страниц - завершено");
+                MessageBox.Show("Сканирование страниц - завершено");
             }
             else
             {
