@@ -275,8 +275,7 @@ namespace SEOScanner
             if (webBrowser1.ReadyState != WebBrowserReadyState.Complete) return;
             if (e.Url.AbsolutePath != (sender as WebBrowser).Url.AbsolutePath) return;
 
-            thread.Abort();
-            Thread.Sleep(1000);
+            thread.Abort();  // если что можно использовать задержку Thread.Sleep(1000);
 
             webBrowser1.Update();
             HtmlDocument document = webBrowser1.Document;
