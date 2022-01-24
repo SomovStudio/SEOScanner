@@ -33,14 +33,43 @@ namespace SEOScanner
             programPath = Environment.CurrentDirectory + "\\";
             configFile = programPath + "config.json";
 
-            string[] result = FileJSON.initFile(FileJSON.UTF_8_BOM, configFile);
+            string[] result = FileJSON.initConfigFile(FileJSON.UTF_8_BOM, configFile);
             addConsoleMessage(result[1]);
             if(result[0] == FileJSON.PASSED)
             {
-                result = FileJSON.validatorJson(FileJSON.UTF_8_BOM, configFile);
-                addConsoleMessage(result[1]);
+                ArrayList configData = FileJSON.readConfigFile(FileJSON.UTF_8_BOM, configFile);
+                if(configData.Count > 0)
+                {
+                    listView2.Items.Clear();
+                    ListViewItem item;
+                    ListViewItem.ListViewSubItem subitem;
+                    foreach (string[] data in configData)
+                    {
+                        item = new ListViewItem();
+                        subitem = new ListViewItem.ListViewSubItem();
+                        subitem.Text = data[0];
+                        item.SubItems.Add(subitem);
+                        subitem = new ListViewItem.ListViewSubItem();
+                        subitem.Text = "ByTag";
+                        item.SubItems.Add(subitem);
+                        subitem = new ListViewItem.ListViewSubItem();
+                        subitem.Text = data[1];
+                        item.SubItems.Add(subitem);
+                        listView2.Items.Add(item);
+
+                        addConsoleMessage("Имя: " + data[0] + " | Значение: " + data[1]);
+                    }
+                }
+                else
+                {
+                    addConsoleMessage("Ошибка чтения конфигурационного файла config.json");
+                }
             }
-            
+
+            if (checkBoxUserAgent.Checked) addConsoleMessage("Настройки User-Agent - по умолчанию (" + textBoxUserAgent.Text + ")");
+            if (radioButton1.Checked) addConsoleMessage("Способ отображения страниц - только HTML (по умолчанию)");
+            else addConsoleMessage("Способ отображения страниц - полностью.");
+
         }
 
         private void addConsoleMessage(string message)
@@ -201,8 +230,8 @@ namespace SEOScanner
                 addConsoleMessage("Ошибка чтения странирцы " + currentURL);
             }
 
-            //webBrowser1.Navigate(currentURL);
-            webBrowser1.DocumentText = page;
+            if(radioButton1.Checked) webBrowser1.DocumentText = page;
+            else webBrowser1.Navigate(currentURL);
 
             thread.Abort();
         }

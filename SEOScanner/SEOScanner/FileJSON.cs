@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections;
 
 namespace SEOScanner
 {
@@ -16,12 +17,12 @@ namespace SEOScanner
         public int timeout;
     }*/
 
-    class TestJsonConfig
+    class FileJsonConfig
     {
-        public TestJsonConfigArguments[] arguments;
+        public FileJsonConfigArguments[] arguments;
     }
 
-    class TestJsonConfigArguments
+    class FileJsonConfigArguments
     {
         public string name;
         public string value;
@@ -38,7 +39,50 @@ namespace SEOScanner
         public const string PASSED = "PASSED";
         public const string FAILED = "FAILED";
 
-        public static string[] initFile(string encoding, string filename)
+        public static string[] validatorJson(string encoding, string filename)
+        {
+            string[] result = new string[2];
+            result[0] = "";
+            result[1] = "";
+            try
+            {
+                StreamReader sr;
+                if (encoding == DEFAULT)
+                {
+                    sr = new StreamReader(filename, Encoding.Default);
+                }
+                else if (encoding == UTF_8)
+                {
+                    sr = new StreamReader(filename, new UTF8Encoding(false));
+                }
+                else if (encoding == UTF_8_BOM)
+                {
+                    sr = new StreamReader(filename, new UTF8Encoding(true));
+                }
+                else if (encoding == WINDOWS_1251)
+                {
+                    sr = new StreamReader(filename, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    sr = new StreamReader(filename, Encoding.Default);
+                }
+                string jsonText = sr.ReadToEnd();
+                sr.Close();
+                //TestJsonConfig test = JsonConvert.DeserializeObject<TestJsonConfig>(jsonText);
+                result[0] = PASSED;
+                result[1] = "Проверка: синтаксис JSON файла - корректный";
+            }
+            catch (Exception ex)
+            {
+                result[0] = FAILED;
+                result[1] = ex.Message;
+            }
+
+            return result;
+        }
+
+        public static string[] initConfigFile(string encoding, string filename)
         {
             string[] result = new string[2];
             result[0] = "";
@@ -47,7 +91,7 @@ namespace SEOScanner
             if (File.Exists(filename))
             {
                 result[0] = PASSED;
-                result[1] = "Файл конфигурации " + filename;
+                result[1] = "Файл конфигурации config.json";
             }
             else
             {
@@ -93,7 +137,7 @@ namespace SEOScanner
                     writer.Close();
 
                     result[0] = PASSED;
-                    result[1] = "Файл конфигурации " + filename + " - успешно создан!";
+                    result[1] = "Файл конфигурации config.json - успешно создан!";
                 }
                 catch (Exception ex)
                 {
@@ -105,11 +149,10 @@ namespace SEOScanner
             return result;
         }
 
-        public static string[] validatorJson(string encoding, string filename)
+        public static ArrayList readConfigFile(string encoding, string filename)
         {
-            string[] result = new string[2];
-            result[0] = "";
-            result[1] = "";
+            ArrayList data = new ArrayList();
+
             try
             {
                 StreamReader sr;
@@ -135,20 +178,20 @@ namespace SEOScanner
                 }
                 string jsonText = sr.ReadToEnd();
                 sr.Close();
-                TestJsonConfig test = JsonConvert.DeserializeObject<TestJsonConfig>(jsonText);
-                result[0] = PASSED;
-                result[1] = "Проверка: синтаксис JSON файла - корректный";
+
+                FileJsonConfig file = JsonConvert.DeserializeObject<FileJsonConfig>(jsonText);
+                foreach (FileJsonConfigArguments argument in file.arguments)
+                {
+                    data.Add(new string[2] { argument.name, argument.value });
+                }
             }
             catch (Exception ex)
             {
-                result[0] = FAILED;
-                result[1] = ex.Message;
+
             }
 
-            return result;
+            return data;
         }
-
-
 
     }
 }

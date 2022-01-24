@@ -157,17 +157,17 @@
   <data name="toolStripButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="toolStripButton4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -185,15 +185,6 @@
         cpuGJfFil8RbPigxk1fXPjLsg+K5/9Rf4UDgD+hiJh6IOz6CAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="richTextBoxListLinks.Text" xml:space="preserve">
-    <value>http://somov.inf.ua/
-http://somov.inf.ua/experience.html
-http://somov.inf.ua/portfolio.html
-http://somov.inf.ua/soft.html
-http://somov.inf.ua/autotesting.html
-http://somov.inf.ua/lib.html
-http://somov.inf.ua/contact.html</value>
-  </data>
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>342, 18</value>
   </metadata>
@@ -202,7 +193,7 @@ http://somov.inf.ua/contact.html</value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAo
-        EgAAAk1TRnQBSQFMAgEBBQEAAZABAAGQAQABEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        EgAAAk1TRnQBSQFMAgEBBQEAAZgBAAGYAQABEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEgBgABIP8A/wD/ACEAAyMBMwMjATMDIwEzAyMBMwMjATMDIwEzAyMBMwMjATMDIwEz
         AyMBMwMjATPUAAFOATsB1QH/AU4BOgHTAf8BTgE5AdIB/wFOATkB0gH/AU4BOQHSAf8BTgE5AdMB/wFO
         ATkB0gH/AU4BOQHSAf8BTgE5AdIB/wFOAToB0wH/AU4BOwHVAf/UAAFNAToB1AH/AUgBYgL/AUkBaAL/
@@ -281,6 +272,18 @@ http://somov.inf.ua/contact.html</value>
         AQcBgAEBAQABAQH4AQ8B+AEPAYABAQEAAQEB/AEfAfwBHwGAAQEBAAEBAfwBHwH8AR8BwAEDAQABAQH+
         AT8B/gE/AeABBwGAAQME/wHwAQ8BwAEHBv8B4AEPBP8L
 </value>
+  </data>
+  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>592, 18</value>
+  </metadata>
+  <data name="richTextBoxListLinks.Text" xml:space="preserve">
+    <value>http://somov.inf.ua/
+http://somov.inf.ua/experience.html
+http://somov.inf.ua/portfolio.html
+http://somov.inf.ua/soft.html
+http://somov.inf.ua/autotesting.html
+http://somov.inf.ua/lib.html
+http://somov.inf.ua/contact.html</value>
   </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>452, 18</value>
