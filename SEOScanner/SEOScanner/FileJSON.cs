@@ -1,0 +1,154 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
+
+namespace SEOScanner
+{
+    /*class TestJson
+    {
+        public string description;
+        public int port;
+        public string[] arguments;
+        public int timeout;
+    }*/
+
+    class TestJsonConfig
+    {
+        public TestJsonConfigArguments[] arguments;
+    }
+
+    class TestJsonConfigArguments
+    {
+        public string name;
+        public string value;
+    }
+
+
+    static class FileJSON
+    {
+        public const string DEFAULT = "DEFAULT";
+        public const string UTF_8 = "UTF-8";
+        public const string UTF_8_BOM = "UTF-8-BOM";
+        public const string WINDOWS_1251 = "WINDOWS-1251";
+        
+        public const string PASSED = "PASSED";
+        public const string FAILED = "FAILED";
+
+        public static string[] initFile(string encoding, string filename)
+        {
+            string[] result = new string[2];
+            result[0] = "";
+            result[1] = "";
+
+            if (File.Exists(filename))
+            {
+                result[0] = PASSED;
+                result[1] = "Файл конфигурации " + filename;
+            }
+            else
+            {
+                string json = "{";
+                json += System.Environment.NewLine + "\"arguments\":[";
+
+                json += System.Environment.NewLine + "{";
+                json += System.Environment.NewLine + "\"name\":\"" + "Заголовок H1" + "\",";
+                json += System.Environment.NewLine + "\"value\":\"" + "h1" + "\"";
+                json += System.Environment.NewLine + "},";
+                json += System.Environment.NewLine + "{";
+                json += System.Environment.NewLine + "\"name\":\"" + "Заголовок H2" + "\",";
+                json += System.Environment.NewLine + "\"value\":\"" + "h2" + "\"";
+                json += System.Environment.NewLine + "}";
+
+                json += System.Environment.NewLine + "]";
+                json += System.Environment.NewLine + "}";
+
+                try
+                {
+                    StreamWriter writer;
+                    if (encoding == DEFAULT)
+                    {
+                        writer = new StreamWriter(filename, false, Encoding.Default);
+                    }
+                    else if (encoding == UTF_8)
+                    {
+                        writer = new StreamWriter(filename, false, new UTF8Encoding(false));
+                    }
+                    else if (encoding == UTF_8_BOM)
+                    {
+                        writer = new StreamWriter(filename, false, new UTF8Encoding(true));
+                    }
+                    else if (encoding == WINDOWS_1251)
+                    {
+                        writer = new StreamWriter(filename, false, Encoding.GetEncoding("Windows-1251"));
+                    }
+                    else
+                    {
+                        writer = new StreamWriter(filename, false, Encoding.Default);
+                    }
+                    writer.Write(json);
+                    writer.Close();
+
+                    result[0] = PASSED;
+                    result[1] = "Файл конфигурации " + filename + " - успешно создан!";
+                }
+                catch (Exception ex)
+                {
+                    result[0] = FAILED;
+                    result[1] = ex.Message;
+                }
+            }
+            
+            return result;
+        }
+
+        public static string[] validatorJson(string encoding, string filename)
+        {
+            string[] result = new string[2];
+            result[0] = "";
+            result[1] = "";
+            try
+            {
+                StreamReader sr;
+                if (encoding == DEFAULT)
+                {
+                    sr = new StreamReader(filename, Encoding.Default);
+                }
+                else if (encoding == UTF_8)
+                {
+                    sr = new StreamReader(filename, new UTF8Encoding(false));
+                }
+                else if (encoding == UTF_8_BOM)
+                {
+                    sr = new StreamReader(filename, new UTF8Encoding(true));
+                }
+                else if (encoding == WINDOWS_1251)
+                {
+                    sr = new StreamReader(filename, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    sr = new StreamReader(filename, Encoding.Default);
+                }
+                string jsonText = sr.ReadToEnd();
+                sr.Close();
+                TestJsonConfig test = JsonConvert.DeserializeObject<TestJsonConfig>(jsonText);
+                result[0] = PASSED;
+                result[1] = "Проверка: синтаксис JSON файла - корректный";
+            }
+            catch (Exception ex)
+            {
+                result[0] = FAILED;
+                result[1] = ex.Message;
+            }
+
+            return result;
+        }
+
+
+
+    }
+}

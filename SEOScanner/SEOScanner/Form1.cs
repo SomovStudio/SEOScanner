@@ -23,10 +23,24 @@ namespace SEOScanner
         private Thread thread;
         private int steps, step, percent;
         private string currentURL;
-        
+        private string programPath;
+        private string configFile;
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             thread = new Thread(loadSitemap);
+            programPath = Environment.CurrentDirectory + "\\";
+            configFile = programPath + "config.json";
+
+            string[] result = FileJSON.initFile(FileJSON.UTF_8_BOM, configFile);
+            addConsoleMessage(result[1]);
+            if(result[0] == FileJSON.PASSED)
+            {
+                result = FileJSON.validatorJson(FileJSON.UTF_8_BOM, configFile);
+                addConsoleMessage(result[1]);
+            }
+            
         }
 
         private void addConsoleMessage(string message)
