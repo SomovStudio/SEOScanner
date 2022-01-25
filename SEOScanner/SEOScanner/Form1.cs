@@ -352,16 +352,32 @@ namespace SEOScanner
                 type_get_value_from = listView2.Items[i].SubItems[6].Text;
                 get_value_from_attribute_name = listView2.Items[i].SubItems[7].Text;
 
+                HtmlElementCollection elements = null;
+
                 if (search_by_tag_name != "")
                 {
-                    HtmlElementCollection elements = HtmlDOM.getElementsByTagName(search_by_tag_name);
+                    elements = HtmlDOM.getElementsByTagName(search_by_tag_name);
                     addConsoleMessage("Количество тэгов " + search_by_tag_name + " на странице = " + elements.Count.ToString());
+                    foreach (HtmlElement element in elements)
+                    {
+                        addConsoleMessage("Тег: " + search_by_tag_name + " | Значение: " + element.InnerText);
+                    }
+                    
                 }
                 if(search_by_tag_id != "")
                 {
                     HtmlElement element = HtmlDOM.getElementById(search_by_tag_id);
                 }
-
+                if(search_by_tag_attribute != "")
+                {
+                    foreach (HtmlElement element in elements)
+                    {
+                        if(search_by_tag_attribute_value == element.GetAttribute(search_by_tag_attribute))
+                        {
+                            addConsoleMessage("Тег: " + search_by_tag_name + " | Атрибут: " + search_by_tag_attribute);
+                        }
+                    }
+                }
             }
 
 
