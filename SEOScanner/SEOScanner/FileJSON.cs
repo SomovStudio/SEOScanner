@@ -149,10 +149,9 @@ namespace SEOScanner
             return result;
         }
 
-        public static ArrayList readConfigFile(string encoding, string filename)
+        public static FileJsonConfig readConfigFile(string encoding, string filename)
         {
-            ArrayList data = new ArrayList();
-
+            FileJsonConfig file = null;
             try
             {
                 StreamReader sr;
@@ -179,18 +178,15 @@ namespace SEOScanner
                 string jsonText = sr.ReadToEnd();
                 sr.Close();
 
-                FileJsonConfig file = JsonConvert.DeserializeObject<FileJsonConfig>(jsonText);
-                foreach (FileJsonConfigArguments argument in file.arguments)
-                {
-                    data.Add(new string[2] { argument.name, argument.value });
-                }
+                file = JsonConvert.DeserializeObject<FileJsonConfig>(jsonText);
+                
             }
             catch (Exception ex)
             {
 
             }
 
-            return data;
+            return file;
         }
 
     }

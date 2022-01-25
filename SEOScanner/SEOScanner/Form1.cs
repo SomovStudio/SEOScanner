@@ -37,27 +37,27 @@ namespace SEOScanner
             addConsoleMessage(result[1]);
             if(result[0] == FileJSON.PASSED)
             {
-                ArrayList configData = FileJSON.readConfigFile(FileJSON.UTF_8_BOM, configFile);
-                if(configData.Count > 0)
+                FileJsonConfig configData = FileJSON.readConfigFile(FileJSON.UTF_8_BOM, configFile);
+                if(configData != null)
                 {
                     listView2.Items.Clear();
                     ListViewItem item;
                     ListViewItem.ListViewSubItem subitem;
-                    foreach (string[] data in configData)
+                    foreach (FileJsonConfigArguments argument in configData.arguments)
                     {
                         item = new ListViewItem();
                         subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = data[0];
+                        subitem.Text = argument.name;
                         item.SubItems.Add(subitem);
                         subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = "ByTag";
+                        subitem.Text = "ByTagName";
                         item.SubItems.Add(subitem);
                         subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = data[1];
+                        subitem.Text = argument.value;
                         item.SubItems.Add(subitem);
                         listView2.Items.Add(item);
 
-                        addConsoleMessage("Имя: " + data[0] + " | Значение: " + data[1]);
+                        addConsoleMessage("Имя: " + argument.name + " | Значение: " + argument.value);
                     }
                 }
                 else
@@ -321,9 +321,35 @@ namespace SEOScanner
             thread.Abort();  // если что можно использовать задержку Thread.Sleep(1000);
 
             webBrowser1.Update();
-            HtmlDocument document = webBrowser1.Document;
+            HtmlDOM.document = webBrowser1.Document;
+
+            string name;
+            string type;
+            string value;
+            int amountItems = listView2.Items.Count;
+            for (int i = 0; i < amountItems; i++)
+            {
+                name = listView2.Items[i].SubItems[1].Text;
+                type = listView2.Items[i].SubItems[2].Text;
+                value = listView2.Items[i].SubItems[3].Text;
+
+                if(type == "ByTagName")
+                {
+                    HtmlElementCollection elements = HtmlDOM.getElementsByTagName(value);
+                    addConsoleMessage(name + ": количество тэгов " + value + " на странице = " + elements.Count.ToString());
+                }
+                if (type == "ById")
+                {
+                    HtmlElement element = HtmlDOM.getElementById(value);
+                }
+            }
+
+
+            //HtmlDocument document = webBrowser1.Document;
             //HtmlElement hElement = document.GetElementsByTagName("h1")[0];
-            addConsoleMessage("Количество тэгов H2 на странице = " + document.GetElementsByTagName("h2").Count.ToString());
+            
+
+
 
             toolStripProgressBar1.Value = step;
             percent = (int)(((double)toolStripProgressBar1.Value / (double)toolStripProgressBar1.Maximum) * 100);
