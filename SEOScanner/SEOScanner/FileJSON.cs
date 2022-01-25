@@ -24,8 +24,12 @@ namespace SEOScanner
 
     class FileJsonConfigArguments
     {
-        public string name;
-        public string value;
+        public string description;                  // краткое описание
+        public string search_value_tag_name;        // значение поиска - имя тега
+        public string search_value_tag_id;          // значение поиска - идентификатор
+        public string search_value_tag_attribute;   // значение поиска - аттрибут
+        public string get_value_from;               // получить значение из
+        public string attribute_name;               // имя аттрибута
     }
 
 
@@ -35,7 +39,10 @@ namespace SEOScanner
         public const string UTF_8 = "UTF-8";
         public const string UTF_8_BOM = "UTF-8-BOM";
         public const string WINDOWS_1251 = "WINDOWS-1251";
-        
+
+        public const string FROM_TAG = "из тега";
+        public const string FROM_ATTRIBUTE = "из атрибута";
+
         public const string PASSED = "PASSED";
         public const string FAILED = "FAILED";
 
@@ -99,12 +106,20 @@ namespace SEOScanner
                 json += System.Environment.NewLine + "\"arguments\":[";
 
                 json += System.Environment.NewLine + "{";
-                json += System.Environment.NewLine + "\"name\":\"" + "Заголовок H1" + "\",";
-                json += System.Environment.NewLine + "\"value\":\"" + "h1" + "\"";
+                json += System.Environment.NewLine + "\"description\":\"" + "Заголовок H1" + "\",";
+                json += System.Environment.NewLine + "\"search_value_tag_name\":\"" + "h1" + "\",";
+                json += System.Environment.NewLine + "\"search_value_tag_id\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_value_tag_attribute\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"get_value_from\":\"" + FROM_TAG + "\",";
+                json += System.Environment.NewLine + "\"attribute_name\":\"" + "" + "\"";
                 json += System.Environment.NewLine + "},";
                 json += System.Environment.NewLine + "{";
-                json += System.Environment.NewLine + "\"name\":\"" + "Заголовок H2" + "\",";
-                json += System.Environment.NewLine + "\"value\":\"" + "h2" + "\"";
+                json += System.Environment.NewLine + "\"description\":\"" + "Заголовок H2" + "\",";
+                json += System.Environment.NewLine + "\"search_value_tag_name\":\"" + "h2" + "\",";
+                json += System.Environment.NewLine + "\"search_value_tag_id\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_value_tag_attribute\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"get_value_from\":\"" + FROM_TAG + "\",";
+                json += System.Environment.NewLine + "\"attribute_name\":\"" + "" + "\"";
                 json += System.Environment.NewLine + "}";
 
                 json += System.Environment.NewLine + "]";

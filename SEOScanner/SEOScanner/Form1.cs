@@ -47,17 +47,24 @@ namespace SEOScanner
                     {
                         item = new ListViewItem();
                         subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = argument.name;
+                        subitem.Text = argument.description;
                         item.SubItems.Add(subitem);
                         subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = "ByTagName";
+                        subitem.Text = argument.search_value_tag_name;
                         item.SubItems.Add(subitem);
                         subitem = new ListViewItem.ListViewSubItem();
-                        subitem.Text = argument.value;
+                        subitem.Text = argument.search_value_tag_id;
+                        item.SubItems.Add(subitem);
+                        subitem = new ListViewItem.ListViewSubItem();
+                        subitem.Text = argument.search_value_tag_attribute;
+                        item.SubItems.Add(subitem);
+                        subitem = new ListViewItem.ListViewSubItem();
+                        subitem.Text = argument.get_value_from;
+                        item.SubItems.Add(subitem);
+                        subitem = new ListViewItem.ListViewSubItem();
+                        subitem.Text = argument.attribute_name;
                         item.SubItems.Add(subitem);
                         listView2.Items.Add(item);
-
-                        addConsoleMessage("Имя: " + argument.name + " | Значение: " + argument.value);
                     }
                 }
                 else
@@ -323,25 +330,32 @@ namespace SEOScanner
             webBrowser1.Update();
             HtmlDOM.document = webBrowser1.Document;
 
-            string name;
-            string type;
-            string value;
+            string description;                  // краткое описание
+            string search_value_tag_name;        // значение поиска - имя тега
+            string search_value_tag_id;          // значение поиска - идентификатор
+            string search_value_tag_attribute;   // значение поиска - аттрибут
+            string get_value_from;               // получить значение из
+            string attribute_name;               // имя аттрибута
             int amountItems = listView2.Items.Count;
             for (int i = 0; i < amountItems; i++)
             {
-                name = listView2.Items[i].SubItems[1].Text;
-                type = listView2.Items[i].SubItems[2].Text;
-                value = listView2.Items[i].SubItems[3].Text;
+                description = listView2.Items[i].SubItems[1].Text;
+                search_value_tag_name = listView2.Items[i].SubItems[2].Text;
+                search_value_tag_id = listView2.Items[i].SubItems[3].Text;
+                search_value_tag_attribute = listView2.Items[i].SubItems[4].Text;
+                get_value_from = listView2.Items[i].SubItems[5].Text;
+                attribute_name = listView2.Items[i].SubItems[6].Text;
 
-                if(type == "ByTagName")
+                if (search_value_tag_name != "")
                 {
-                    HtmlElementCollection elements = HtmlDOM.getElementsByTagName(value);
-                    addConsoleMessage(name + ": количество тэгов " + value + " на странице = " + elements.Count.ToString());
+                    HtmlElementCollection elements = HtmlDOM.getElementsByTagName(search_value_tag_name);
+                    addConsoleMessage("Количество тэгов " + search_value_tag_name + " на странице = " + elements.Count.ToString());
                 }
-                if (type == "ById")
+                if(search_value_tag_id != "")
                 {
-                    HtmlElement element = HtmlDOM.getElementById(value);
+                    HtmlElement element = HtmlDOM.getElementById(search_value_tag_id);
                 }
+
             }
 
 
