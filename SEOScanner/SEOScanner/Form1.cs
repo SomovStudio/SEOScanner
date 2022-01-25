@@ -307,6 +307,11 @@ namespace SEOScanner
                 MessageBox.Show("Процесс занят! Дождитесь завершения или прекратите текущий процесс вручную.");
                 return;
             }
+            if(richTextBoxListLinks.Lines.Length <= 0)
+            {
+                MessageBox.Show("Список ссылок пустой, невозможно запустить сканирование");
+                return;
+            }
 
             steps = richTextBoxListLinks.Lines.Length;
             step = 0;
@@ -328,71 +333,53 @@ namespace SEOScanner
             if (webBrowser1.ReadyState != WebBrowserReadyState.Complete) return;
             if (e.Url.AbsolutePath != (sender as WebBrowser).Url.AbsolutePath) return;
 
-            thread.Abort();  // если что можно использовать задержку Thread.Sleep(1000);
+            thread.Abort();  // можно использовать задержку Thread.Sleep(1000);
 
             webBrowser1.Update();
             HtmlDOM.document = webBrowser1.Document;
 
-            string description;                      // краткое описание
-            string search_by_tag_name;               // значение поиска - имя тега
-            string search_by_tag_id;                 // значение поиска - идентификатор
-            string search_by_tag_attribute;          // значение поиска - имя аттрибута
-            string search_by_tag_attribute_value;    // значение поиска - значение в аттрибуте
-            string type_get_value_from;              // получить значение из
-            string get_value_from_attribute_name;    // имя аттрибута
+            string _description;                      // краткое описание
+            string _search_by_tag_name;               // значение поиска - имя тега
+            string _search_by_tag_id;                 // значение поиска - идентификатор
+            string _search_by_tag_attribute;          // значение поиска - имя аттрибута
+            string _search_by_tag_attribute_value;    // значение поиска - значение в аттрибуте
+            string _type_get_value_from;              // получить значение из
+            string _get_value_from_attribute_name;    // имя аттрибута
 
             int amountItems = listView2.Items.Count;
             for (int i = 0; i < amountItems; i++)
             {
-                description = listView2.Items[i].SubItems[1].Text;
-                search_by_tag_name = listView2.Items[i].SubItems[2].Text;
-                search_by_tag_id = listView2.Items[i].SubItems[3].Text;
-                search_by_tag_attribute = listView2.Items[i].SubItems[4].Text;
-                search_by_tag_attribute_value = listView2.Items[i].SubItems[5].Text;
-                type_get_value_from = listView2.Items[i].SubItems[6].Text;
-                get_value_from_attribute_name = listView2.Items[i].SubItems[7].Text;
+                _description = listView2.Items[i].SubItems[1].Text;
+                _search_by_tag_name = listView2.Items[i].SubItems[2].Text;
+                _search_by_tag_id = listView2.Items[i].SubItems[3].Text;
+                _search_by_tag_attribute = listView2.Items[i].SubItems[4].Text;
+                _search_by_tag_attribute_value = listView2.Items[i].SubItems[5].Text;
+                _type_get_value_from = listView2.Items[i].SubItems[6].Text;
+                _get_value_from_attribute_name = listView2.Items[i].SubItems[7].Text;
 
-                HtmlElementCollection elements = null;
-
-                if (search_by_tag_name != "")
+                ArrayList values = new ArrayList();
+                values = HtmlDOM.getValues(_search_by_tag_name, _search_by_tag_id, _search_by_tag_attribute,
+                    _search_by_tag_attribute_value, _type_get_value_from, _get_value_from_attribute_name);
+                
+                if(values.Count > 0)
                 {
-                    elements = HtmlDOM.getElementsByTagName(search_by_tag_name);
-                    addConsoleMessage("Количество тэгов " + search_by_tag_name + " на странице = " + elements.Count.ToString());
-                    foreach (HtmlElement element in elements)
+                    foreach (string value in values)
                     {
-                        addConsoleMessage("Тег: " + search_by_tag_name + " | Значение: " + element.InnerText);
+                        //addConsoleMessage(_description + " | Тег: " + _search_by_tag_name + " " + _search_by_tag_id + " | Аттрибут: " + _search_by_tag_attribute + " " + _search_by_tag_attribute_value + " | Тип: " + _type_get_value_from + " " + _get_value_from_attribute_name + " | Значение: " + value);
+                        addConsoleMessage(_description + ": " + value);
                     }
-                    
                 }
-                if(search_by_tag_id != "")
+                else
                 {
-                    HtmlElement element = HtmlDOM.getElementById(search_by_tag_id);
-                }
-                if(search_by_tag_attribute != "")
-                {
-                    foreach (HtmlElement element in elements)
-                    {
-                        if(search_by_tag_attribute_value == element.GetAttribute(search_by_tag_attribute))
-                        {
-                            addConsoleMessage("Тег: " + search_by_tag_name + " | Атрибут: " + search_by_tag_attribute);
-                        }
-                    }
+                    addConsoleMessage(_description + " ");
                 }
             }
-
-
-            //HtmlDocument document = webBrowser1.Document;
-            //HtmlElement hElement = document.GetElementsByTagName("h1")[0];
-            
-
-
 
             toolStripProgressBar1.Value = step;
             percent = (int)(((double)toolStripProgressBar1.Value / (double)toolStripProgressBar1.Maximum) * 100);
             addConsoleMessage("Просканировано " + step.ToString() + " из " + steps.ToString() + " страниц " + currentURL);
             toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
             
-
             if (step == steps)
             {
                 addConsoleMessage("Сканирование страниц - завершено");

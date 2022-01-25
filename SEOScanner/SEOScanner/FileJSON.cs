@@ -141,6 +141,15 @@ namespace SEOScanner
                 json += System.Environment.NewLine + "\"search_by_tag_attribute_value\":\"" + "" + "\",";
                 json += System.Environment.NewLine + "\"type_get_value_from\":\"" + FROM_TAG + "\",";
                 json += System.Environment.NewLine + "\"get_value_from_attribute_name\":\"" + "" + "\"";
+                json += System.Environment.NewLine + "},";
+                json += System.Environment.NewLine + "{";
+                json += System.Environment.NewLine + "\"description\":\"" + "Заголовок на странице (h2)" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_name\":\"" + "h2" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_id\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute_value\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"type_get_value_from\":\"" + FROM_TAG + "\",";
+                json += System.Environment.NewLine + "\"get_value_from_attribute_name\":\"" + "" + "\"";
                 json += System.Environment.NewLine + "}";
 
                 json += System.Environment.NewLine + "]";
