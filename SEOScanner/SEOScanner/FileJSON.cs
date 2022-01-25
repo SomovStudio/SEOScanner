@@ -24,12 +24,13 @@ namespace SEOScanner
 
     class FileJsonConfigArguments
     {
-        public string description;                  // краткое описание
-        public string search_value_tag_name;        // значение поиска - имя тега
-        public string search_value_tag_id;          // значение поиска - идентификатор
-        public string search_value_tag_attribute;   // значение поиска - аттрибут
-        public string get_value_from;               // получить значение из
-        public string attribute_name;               // имя аттрибута
+        public string description;                      // краткое описание
+        public string search_by_tag_name;               // значение поиска - имя тега
+        public string search_by_tag_id;                 // значение поиска - идентификатор
+        public string search_by_tag_attribute;          // значение поиска - имя аттрибута
+        public string search_by_tag_attribute_value;    // значение поиска - значение в аттрибуте
+        public string type_get_value_from;              // получить значение из
+        public string get_value_from_attribute_name;    // имя аттрибута
     }
 
 
@@ -106,20 +107,40 @@ namespace SEOScanner
                 json += System.Environment.NewLine + "\"arguments\":[";
 
                 json += System.Environment.NewLine + "{";
-                json += System.Environment.NewLine + "\"description\":\"" + "Заголовок H1" + "\",";
-                json += System.Environment.NewLine + "\"search_value_tag_name\":\"" + "h1" + "\",";
-                json += System.Environment.NewLine + "\"search_value_tag_id\":\"" + "" + "\",";
-                json += System.Environment.NewLine + "\"search_value_tag_attribute\":\"" + "" + "\",";
-                json += System.Environment.NewLine + "\"get_value_from\":\"" + FROM_TAG + "\",";
-                json += System.Environment.NewLine + "\"attribute_name\":\"" + "" + "\"";
+                json += System.Environment.NewLine + "\"description\":\"" + "Ключевые слова (keywords)" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_name\":\"" + "meta" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_id\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute\":\"" + "name" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute_value\":\"" + "keywords" + "\",";
+                json += System.Environment.NewLine + "\"type_get_value_from\":\"" + FROM_ATTRIBUTE + "\",";
+                json += System.Environment.NewLine + "\"get_value_from_attribute_name\":\"" + "content" + "\"";
                 json += System.Environment.NewLine + "},";
                 json += System.Environment.NewLine + "{";
-                json += System.Environment.NewLine + "\"description\":\"" + "Заголовок H2" + "\",";
-                json += System.Environment.NewLine + "\"search_value_tag_name\":\"" + "h2" + "\",";
-                json += System.Environment.NewLine + "\"search_value_tag_id\":\"" + "" + "\",";
-                json += System.Environment.NewLine + "\"search_value_tag_attribute\":\"" + "" + "\",";
-                json += System.Environment.NewLine + "\"get_value_from\":\"" + FROM_TAG + "\",";
-                json += System.Environment.NewLine + "\"attribute_name\":\"" + "" + "\"";
+                json += System.Environment.NewLine + "\"description\":\"" + "Описание страницы (description)" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_name\":\"" + "meta" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_id\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute\":\"" + "name" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute_value\":\"description" + "" + "\",";
+                json += System.Environment.NewLine + "\"type_get_value_from\":\"" + FROM_ATTRIBUTE + "\",";
+                json += System.Environment.NewLine + "\"get_value_from_attribute_name\":\"" + "content" + "\"";
+                json += System.Environment.NewLine + "},";
+                json += System.Environment.NewLine + "{";
+                json += System.Environment.NewLine + "\"description\":\"" + "Заголовок документа (title)" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_name\":\"" + "title" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_id\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute_value\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"type_get_value_from\":\"" + FROM_TAG + "\",";
+                json += System.Environment.NewLine + "\"get_value_from_attribute_name\":\"" + "" + "\"";
+                json += System.Environment.NewLine + "},";
+                json += System.Environment.NewLine + "{";
+                json += System.Environment.NewLine + "\"description\":\"" + "Заголовок на странице (h1)" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_name\":\"" + "h1" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_id\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute_value\":\"" + "" + "\",";
+                json += System.Environment.NewLine + "\"type_get_value_from\":\"" + FROM_TAG + "\",";
+                json += System.Environment.NewLine + "\"get_value_from_attribute_name\":\"" + "" + "\"";
                 json += System.Environment.NewLine + "}";
 
                 json += System.Environment.NewLine + "]";
