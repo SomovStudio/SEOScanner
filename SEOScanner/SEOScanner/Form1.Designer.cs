@@ -102,12 +102,16 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.reportRichTextBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -139,6 +143,9 @@
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.panel16.SuspendLayout();
+            this.panel18.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -698,7 +705,6 @@
             // 
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
@@ -880,17 +886,10 @@
             this.columnHeader5.Text = "Статус";
             this.columnHeader5.Width = 100;
             // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1000, 296);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "Дерево результатов";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.panel16);
+            this.tabPage6.Controls.Add(this.panel18);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(1000, 296);
@@ -932,6 +931,63 @@
             this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton7.Text = "Удалить запись";
             this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            // 
+            // panel16
+            // 
+            this.panel16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel16.Controls.Add(this.panel17);
+            this.panel16.Controls.Add(this.label7);
+            this.panel16.Location = new System.Drawing.Point(0, 0);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(1000, 18);
+            this.panel16.TabIndex = 4;
+            // 
+            // panel17
+            // 
+            this.panel17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel17.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel17.Location = new System.Drawing.Point(0, 16);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(1000, 2);
+            this.panel17.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.SteelBlue;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(150, 18);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Отчет:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel18
+            // 
+            this.panel18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel18.Controls.Add(this.reportRichTextBox);
+            this.panel18.Location = new System.Drawing.Point(0, 17);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(1000, 279);
+            this.panel18.TabIndex = 5;
+            // 
+            // reportRichTextBox
+            // 
+            this.reportRichTextBox.BackColor = System.Drawing.Color.White;
+            this.reportRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.reportRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportRichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.reportRichTextBox.Name = "reportRichTextBox";
+            this.reportRichTextBox.ReadOnly = true;
+            this.reportRichTextBox.Size = new System.Drawing.Size(998, 277);
+            this.reportRichTextBox.TabIndex = 0;
+            this.reportRichTextBox.Text = "";
             // 
             // Form1
             // 
@@ -985,6 +1041,9 @@
             this.tabPage4.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.panel16.ResumeLayout(false);
+            this.panel18.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1051,7 +1110,6 @@
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radioButton2;
@@ -1070,6 +1128,11 @@
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         public System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panel18;
+        private System.Windows.Forms.RichTextBox reportRichTextBox;
     }
 }
 

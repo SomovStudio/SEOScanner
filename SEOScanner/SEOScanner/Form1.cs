@@ -89,6 +89,12 @@ namespace SEOScanner
             consoleRichTextBox.Update();
         }
 
+        private void addReportMessage(string message)
+        {
+            reportRichTextBox.Text = reportRichTextBox.Text + Environment.NewLine + message;
+            reportRichTextBox.Update();
+        }
+
         /* Остановить процесс */
         private void stopProcess()
         {
@@ -178,55 +184,12 @@ namespace SEOScanner
             thread.Abort();
         }
 
-        private void scanner()
-        {
-            try
-            {
-                int percent = 0;
-                int amount = richTextBoxListLinks.Lines.Length;
-                toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
-                toolStripProgressBar1.Maximum = amount;
-
-                for (int i = 0; i < amount; i++)
-                {
-                    string url = richTextBoxListLinks.Lines[i];
-                    string page;
-                    if (checkBoxUserAgent.Checked == false) page = Sitemap.getPageHtmlDOM(url, textBoxUserAgent.Text);
-                    else page = Sitemap.getPageHtmlDOM(url, "");
-
-                    //webBrowser1.Navigate(url);
-                    webBrowser1.DocumentText = page;
-                    
-
-
-
-                    toolStripProgressBar1.Value = i+1;
-                    percent = (int)(((double)toolStripProgressBar1.Value / (double)toolStripProgressBar1.Maximum) * 100);
-                    toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
-                    addConsoleMessage("Просканировано " + (i + 1).ToString() + " из " + amount.ToString() + " страниц " + url);
-                }
-
-
-                addConsoleMessage("Сканирование страниц - завершено");
-            }
-            catch (Exception error)
-            {
-                addConsoleMessage("Сообщение: " + error.Message);
-            }
-            finally
-            {
-                thread.Abort();
-                addConsoleMessage("Процесс завершен");
-                MessageBox.Show("Процесс завершен!");
-            }
-
-            thread.Abort();
-        }
-
         private void runScanner()
         {
             currentURL = richTextBoxListLinks.Lines[step];
             step++;
+
+            addReportMessage("Страница:" + currentURL);
 
             string page = "";
             try
@@ -241,7 +204,7 @@ namespace SEOScanner
             }
 
             if(radioButton1.Checked) webBrowser1.DocumentText = page;
-            else webBrowser1.Navigate(currentURL);
+            else webBrowser1.Navigate(currentURL); // без user agent !!!!!
 
             thread.Abort();
         }
@@ -431,15 +394,17 @@ namespace SEOScanner
                 {
                     foreach (string value in values)
                     {
-                        //addConsoleMessage(_description + " | Тег: " + _search_by_tag_name + " " + _search_by_tag_id + " | Аттрибут: " + _search_by_tag_attribute + " " + _search_by_tag_attribute_value + " | Тип: " + _type_get_value_from + " " + _get_value_from_attribute_name + " | Значение: " + value);
-                        addConsoleMessage(_description + ": " + value);
+                        //addReportMessage(_description + " | Тег: " + _search_by_tag_name + " " + _search_by_tag_id + " | Аттрибут: " + _search_by_tag_attribute + " " + _search_by_tag_attribute_value + " | Тип: " + _type_get_value_from + " " + _get_value_from_attribute_name + " | Значение: " + value);
+                        addReportMessage(_description + ": " + value);
                     }
                 }
                 else
                 {
-                    addConsoleMessage(_description + " ");
+                    addReportMessage(_description + ":");
                 }
             }
+            addReportMessage("");
+
 
             toolStripProgressBar1.Value = step;
             percent = (int)(((double)toolStripProgressBar1.Value / (double)toolStripProgressBar1.Maximum) * 100);
