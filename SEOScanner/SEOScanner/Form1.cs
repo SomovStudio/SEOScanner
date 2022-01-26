@@ -95,6 +95,30 @@ namespace SEOScanner
             reportRichTextBox.Update();
         }
 
+        private const string BLUE = "blue";
+        private const string YELLOW = "yellow";
+        private const string RED = "red";
+
+        private void addItemInTableReport(string color, string page, string obj, string value)
+        {
+            ListViewItem item;
+            ListViewItem.ListViewSubItem subitem;
+            item = new ListViewItem();
+            subitem = new ListViewItem.ListViewSubItem();
+            subitem.Text = page;
+            item.SubItems.Add(subitem);
+            subitem = new ListViewItem.ListViewSubItem();
+            subitem.Text = obj;
+            item.SubItems.Add(subitem);
+            subitem = new ListViewItem.ListViewSubItem();
+            subitem.Text = value;
+            item.SubItems.Add(subitem);
+            if (color == BLUE) item.ImageIndex = 0;
+            if (color == YELLOW) item.ImageIndex = 1;
+            if (color == RED) item.ImageIndex = 2;
+            listView1.Items.Add(item);
+        }
+
         /* Остановить процесс */
         private void stopProcess()
         {
@@ -196,11 +220,13 @@ namespace SEOScanner
             {
                 if (checkBoxUserAgent.Checked == false) page = Sitemap.getPageHtmlDOM(currentURL, textBoxUserAgent.Text);
                 else page = Sitemap.getPageHtmlDOM(currentURL, "");
+                addItemInTableReport(BLUE, currentURL, "", "");
             }
             catch (Exception error)
             {
                 addConsoleMessage("Ошибка: " + error.Message);
                 addConsoleMessage("Ошибка чтения странирцы " + currentURL);
+                addItemInTableReport(RED, currentURL, "", error.Message);
             }
 
             if(radioButton1.Checked) webBrowser1.DocumentText = page;
@@ -350,6 +376,8 @@ namespace SEOScanner
             toolStripProgressBar1.Value = step;
             toolStripProgressBar1.Maximum = steps;
             toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
+            listView1.Items.Clear();
+            reportRichTextBox.Text = "";
 
             webBrowser1.ScriptErrorsSuppressed = true;
             
@@ -396,11 +424,14 @@ namespace SEOScanner
                     {
                         //addReportMessage(_description + " | Тег: " + _search_by_tag_name + " " + _search_by_tag_id + " | Аттрибут: " + _search_by_tag_attribute + " " + _search_by_tag_attribute_value + " | Тип: " + _type_get_value_from + " " + _get_value_from_attribute_name + " | Значение: " + value);
                         addReportMessage(_description + ": " + value);
+                        if(value != "" && value != null) addItemInTableReport(BLUE, "", _description, value);
+                        else addItemInTableReport(YELLOW, "", _description, "");
                     }
                 }
                 else
                 {
                     addReportMessage(_description + ":");
+                    addItemInTableReport(YELLOW, "", _description, "");
                 }
             }
             addReportMessage("");
