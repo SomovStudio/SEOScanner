@@ -66,10 +66,21 @@ namespace SEOScanner
                 {
                     if (search_by_tag_attribute != "") // фильтр по атрибуту
                     {
-                        if (search_by_tag_attribute_value == element.GetAttribute(search_by_tag_attribute))
+                        if(search_by_tag_attribute_value != "") // если поиск по имени атрибута со значением атрибута
                         {
-                            if (type_get_value_from == FileJSON.FROM_TAG) values.Add(element.InnerText);
-                            else if (type_get_value_from == FileJSON.FROM_ATTRIBUTE) values.Add(element.GetAttribute(get_value_from_attribute_name));
+                            if (search_by_tag_attribute_value == element.GetAttribute(search_by_tag_attribute))
+                            {
+                                if (type_get_value_from == FileJSON.FROM_TAG) values.Add(element.InnerText);
+                                else if (type_get_value_from == FileJSON.FROM_ATTRIBUTE) values.Add(element.GetAttribute(get_value_from_attribute_name));
+                            }
+                        }
+                        else
+                        {
+                            if(element.GetAttribute(search_by_tag_attribute) != "") // если поиск по имени атрибута но без значения атрибута
+                            {
+                                if (type_get_value_from == FileJSON.FROM_TAG) values.Add(element.InnerText);
+                                else if (type_get_value_from == FileJSON.FROM_ATTRIBUTE) values.Add(element.GetAttribute(get_value_from_attribute_name));
+                            }
                         }
                     }
                     else // фильтр только по тегу (без атрибута)
@@ -84,10 +95,21 @@ namespace SEOScanner
                 HtmlElement element = HtmlDOM.getElementById(search_by_tag_id);
                 if (search_by_tag_attribute != "") // фильтр по атрибуту
                 {
-                    if (search_by_tag_attribute_value == element.GetAttribute(search_by_tag_attribute))
+                    if (search_by_tag_attribute_value != "") // если поиск по имени атрибута со значением атрибута
                     {
-                        if (type_get_value_from == FileJSON.FROM_TAG) values.Add(element.InnerText);
-                        else if (type_get_value_from == FileJSON.FROM_ATTRIBUTE) values.Add(element.GetAttribute(get_value_from_attribute_name));
+                        if (search_by_tag_attribute_value == element.GetAttribute(search_by_tag_attribute))
+                        {
+                            if (type_get_value_from == FileJSON.FROM_TAG) values.Add(element.InnerText);
+                            else if (type_get_value_from == FileJSON.FROM_ATTRIBUTE) values.Add(element.GetAttribute(get_value_from_attribute_name));
+                        }
+                    }
+                    else
+                    {
+                        if (element.GetAttribute(search_by_tag_attribute) != "") // если поиск по имени атрибута но без значения атрибута
+                        {
+                            if (type_get_value_from == FileJSON.FROM_TAG) values.Add(element.InnerText);
+                            else if (type_get_value_from == FileJSON.FROM_ATTRIBUTE) values.Add(element.GetAttribute(get_value_from_attribute_name));
+                        }
                     }
                 }
                 else // фильтр только по тегу (без атрибута)
