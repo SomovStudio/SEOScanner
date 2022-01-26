@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -243,6 +244,57 @@ namespace SEOScanner
             addConsoleMessage(result[1]);
         }
 
+        /* Поиск по тексту */
+        int _findIndex = 0;
+        int _findLast = 0;
+        String _findText = "";
+        private void findText(ToolStripComboBox _cbox)
+        {
+            try
+            {
+                bool resolution = true;
+                for (int k = 0; k < _cbox.Items.Count; k++)
+                    if (_cbox.Items[k].ToString() == _cbox.Text) resolution = false;
+                if (resolution) _cbox.Items.Add(_cbox.Text);
+                if (_findText != _cbox.Text)
+                {
+                    _findIndex = 0;
+                    _findLast = 0;
+                    _findText = _cbox.Text;
+                }
+                if (reportRichTextBox.Find(_cbox.Text, _findIndex, reportRichTextBox.TextLength - 1, RichTextBoxFinds.None) >= 0)
+                {
+                    reportRichTextBox.Select();
+                    _findIndex = reportRichTextBox.SelectionStart + reportRichTextBox.SelectionLength;
+                    if (_findLast == reportRichTextBox.SelectionStart)
+                    {
+                        addConsoleMessage("Поиск в отчете - завершен");
+                        MessageBox.Show("Поиск в отчете - завершен");
+                        _findIndex = 0;
+                        _findLast = 0;
+                        _findText = _cbox.Text;
+                    }
+                    else
+                    {
+                        _findLast = reportRichTextBox.SelectionStart;
+                    }
+                }
+                else
+                {
+                    addConsoleMessage("Поиск в отчете - завершен");
+                    MessageBox.Show("Поиск в отчете - завершен");
+                    _findIndex = 0;
+                    _findLast = 0;
+                    _findText = _cbox.Text;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
         /* ------------------------------------------------------------------------------------------- */
 
         /*
@@ -352,6 +404,57 @@ namespace SEOScanner
                     listView2.Items[index].Remove();
                     updateConfig();
                 }
+            }
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                findText(toolStripComboBox2);
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
+        private void toolStripComboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar.GetHashCode().ToString() == "851981")
+                {
+                    findText(toolStripComboBox2);
+                }
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
+        private void toolStripButton10_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.FileName = "";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    reportRichTextBox.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                    if(File.Exists(saveFileDialog1.FileName)) addConsoleMessage("Отчет успешно сохранён в файл " + saveFileDialog1.FileName);
+                    else addConsoleMessage("Ошибка: Отчет не удалось сохранить в файл " + saveFileDialog1.FileName);
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+                addConsoleMessage("Ошибка: " + error.Message);
             }
         }
 
