@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace SEOScanner
 {
@@ -41,8 +42,8 @@ namespace SEOScanner
         public const string UTF_8_BOM = "UTF-8-BOM";
         public const string WINDOWS_1251 = "WINDOWS-1251";
 
-        public const string FROM_TAG = "из тега";
-        public const string FROM_ATTRIBUTE = "из атрибута";
+        public const string FROM_TAG = "tag";
+        public const string FROM_ATTRIBUTE = "attribute";
 
         public const string PASSED = "PASSED";
         public const string FAILED = "FAILED";
@@ -233,6 +234,74 @@ namespace SEOScanner
 
             return file;
         }
+
+        public static string[] updateConfigFile(string encoding, string filename, ListView listView)
+        {
+            string[] result = new string[2];
+            result[0] = "";
+            result[1] = "";
+
+            string json = "{";
+            json += System.Environment.NewLine + "\"arguments\":[";
+
+            int count = listView.Items.Count;
+            for (int i = 0; i < count; i++)
+            {
+                ListViewItem item = listView.Items[i];
+                json += System.Environment.NewLine + "{";
+                json += System.Environment.NewLine + "\"description\":\"" + item.SubItems[1].Text + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_name\":\"" + item.SubItems[2].Text + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_id\":\"" + item.SubItems[3].Text + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute\":\"" + item.SubItems[4].Text + "\",";
+                json += System.Environment.NewLine + "\"search_by_tag_attribute_value\":\"" + item.SubItems[5].Text + "\",";
+                json += System.Environment.NewLine + "\"type_get_value_from\":\"" + item.SubItems[6].Text + "\",";
+                json += System.Environment.NewLine + "\"get_value_from_attribute_name\":\"" + item.SubItems[7].Text + "\"";
+                if (i < count - 1) json += System.Environment.NewLine + "},";
+                else json += System.Environment.NewLine + "}";
+            }
+
+            json += System.Environment.NewLine + "]";
+            json += System.Environment.NewLine + "}";
+
+            try
+            {
+                StreamWriter writer;
+                if (encoding == DEFAULT)
+                {
+                    writer = new StreamWriter(filename, false, Encoding.Default);
+                }
+                else if (encoding == UTF_8)
+                {
+                    writer = new StreamWriter(filename, false, new UTF8Encoding(false));
+                }
+                else if (encoding == UTF_8_BOM)
+                {
+                    writer = new StreamWriter(filename, false, new UTF8Encoding(true));
+                }
+                else if (encoding == WINDOWS_1251)
+                {
+                    writer = new StreamWriter(filename, false, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    writer = new StreamWriter(filename, false, Encoding.Default);
+                }
+                writer.Write(json);
+                writer.Close();
+
+                result[0] = PASSED;
+                result[1] = "Файл конфигурации config.json - обновлен";
+            }
+            catch (Exception ex)
+            {
+                result[0] = FAILED;
+                result[1] = ex.Message;
+            }
+
+            return result;
+        }
+
+
 
     }
 }

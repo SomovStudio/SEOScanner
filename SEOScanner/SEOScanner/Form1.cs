@@ -246,6 +246,13 @@ namespace SEOScanner
             thread.Abort();
         }
 
+        public void updateConfig()
+        {
+            programPath = Environment.CurrentDirectory + "\\";
+            configFile = programPath + "config.json";
+            string[] result = FileJSON.updateConfigFile(FileJSON.UTF_8_BOM, configFile, listView2);
+            addConsoleMessage(result[1]);
+        }
 
         /* ------------------------------------------------------------------------------------------- */
 
@@ -298,6 +305,65 @@ namespace SEOScanner
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             stopProcess();
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            Form2 form = new Form2();
+            form.Text = "Новая запись";
+            form.parentForm = this;
+            form.Show();
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            if (listView2.FocusedItem != null)
+            {
+                string _description;                      // краткое описание
+                string _search_by_tag_name;               // значение поиска - имя тега
+                string _search_by_tag_id;                 // значение поиска - идентификатор
+                string _search_by_tag_attribute;          // значение поиска - имя аттрибута
+                string _search_by_tag_attribute_value;    // значение поиска - значение в аттрибуте
+                string _type_get_value_from;              // получить значение из
+                string _get_value_from_attribute_name;    // имя аттрибута
+
+                int index = listView2.FocusedItem.Index;
+
+                _description = listView2.Items[index].SubItems[1].Text;
+                _search_by_tag_name = listView2.Items[index].SubItems[2].Text;
+                _search_by_tag_id = listView2.Items[index].SubItems[3].Text;
+                _search_by_tag_attribute = listView2.Items[index].SubItems[4].Text;
+                _search_by_tag_attribute_value = listView2.Items[index].SubItems[5].Text;
+                _type_get_value_from = listView2.Items[index].SubItems[6].Text;
+                _get_value_from_attribute_name = listView2.Items[index].SubItems[7].Text;
+
+                Form2 form = new Form2();
+                form.Text = "Редактировать запись";
+                form.parentForm = this;
+                form.index = index;
+                form.textBox1.Text = _description;
+                form.textBox2.Text = _search_by_tag_name;
+                form.textBox3.Text = _search_by_tag_id;
+                form.textBox4.Text = _search_by_tag_attribute;
+                form.textBox5.Text = _search_by_tag_attribute_value;
+                form.comboBox1.Text = _type_get_value_from;
+                form.textBox6.Text = _get_value_from_attribute_name;
+
+                form.Show();
+            }
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            if (listView2.FocusedItem != null)
+            {
+                if (MessageBox.Show("Вы точно хотите удалить запись?", "Вопрос", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int index = listView2.FocusedItem.Index;
+                    listView2.Items[index].Remove();
+                    updateConfig();
+                }
+            }
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
