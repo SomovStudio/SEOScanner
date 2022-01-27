@@ -295,6 +295,63 @@ namespace SEOScanner
             }
         }
 
+        /* Поиск по таблице */
+        int _tabFindIndex = 0;
+        int _tabFindLast = 0;
+        String _tabFindText = "";
+        private void tabFindValue(ToolStripComboBox _cbox)
+        {
+            try
+            {
+                bool resolution = true;
+                for (int k = 0; k < _cbox.Items.Count; k++)
+                {
+                    if (_cbox.Items[k].ToString() == _cbox.Text) resolution = false;
+                }
+                if (resolution) _cbox.Items.Add(_cbox.Text);
+                if (_tabFindText != _cbox.Text)
+                {
+                    _tabFindIndex = 0;
+                    _tabFindLast = 0;
+                    _tabFindText = _cbox.Text;
+                }
+
+                string _page;
+                string _object;
+                string _value;
+                int count = listView1.Items.Count;
+                for (_tabFindIndex = _tabFindLast; _tabFindIndex < count; _tabFindIndex++)
+                {
+                    ListViewItem item = listView1.Items[_tabFindIndex];
+                    _page = item.SubItems[1].Text;
+                    _object = item.SubItems[2].Text;
+                    _value = item.SubItems[3].Text;
+
+                    if(_page.IndexOf(_tabFindText) > 0 || _object.IndexOf(_tabFindText) > 0 || _value.IndexOf(_tabFindText) > 0)
+                    {
+                        listView1.Focus();
+                        listView1.Items[_tabFindIndex].Selected = true;
+                        listView1.EnsureVisible(_tabFindIndex);
+                        _tabFindLast = _tabFindIndex + 1;
+                        break;
+                    }
+                }
+
+                if(_tabFindIndex >= count)
+                {
+                    addConsoleMessage("Поиск в таблице результатов - завершен");
+                    MessageBox.Show("Поиск в таблице результатов - завершен");
+                    _tabFindIndex = 0;
+                    _tabFindLast = 0;
+                    _tabFindText = _cbox.Text;
+                }
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
         /* ------------------------------------------------------------------------------------------- */
 
         /*
@@ -407,9 +464,31 @@ namespace SEOScanner
             }
         }
 
+        private void toolStripComboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar.GetHashCode().ToString() == "851981")
+                {
+                    tabFindValue(toolStripComboBox1);
+                }
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                tabFindValue(toolStripComboBox1);
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
         }
 
         private void toolStripButton9_Click(object sender, EventArgs e)
