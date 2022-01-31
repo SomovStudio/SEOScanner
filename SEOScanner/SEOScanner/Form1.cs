@@ -230,8 +230,12 @@ namespace SEOScanner
                 addItemInTableReport(RED, currentURL, "", error.Message);
             }
 
-            if(radioButton1.Checked) webBrowser1.DocumentText = page;
-            else webBrowser1.Navigate(currentURL); // без user agent !!!!!
+            if (radioButton1.Checked) webBrowser1.DocumentText = page;
+            else
+            {
+                if (checkBoxUserAgent.Checked == true) webBrowser1.Navigate(currentURL, "", null, string.Format("User-Agent: {0}\r\n", textBoxUserAgent.Text));
+                else webBrowser1.Navigate(currentURL); // без user agent !!!!!
+            }
 
             thread.Abort();
         }
@@ -373,10 +377,12 @@ namespace SEOScanner
             {
                 textBoxUserAgent.ReadOnly = true;
                 textBoxUserAgent.Text = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.202 Safari/535.1";
+                addConsoleMessage("Настройки User-Agent - по умолчанию (" + textBoxUserAgent.Text + ")");
             }
             else
             {
                 textBoxUserAgent.ReadOnly = false;
+                addConsoleMessage("Пользовательские настройки User-Agent");
             }
         }
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -807,6 +813,17 @@ namespace SEOScanner
             {
                 addConsoleMessage("Ошибка: " + ex.Message);
             }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked) addConsoleMessage("Способ отображения страниц - только HTML (по умолчанию)");
+            else addConsoleMessage("Способ отображения страниц - полностью.");
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
