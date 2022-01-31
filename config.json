@@ -1,0 +1,85 @@
+﻿{
+"arguments":[
+{
+"description":"Ключевые слова (keywords)",
+"search_by_tag_name":"meta",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"name",
+"search_by_tag_attribute_value":"keywords",
+"type_get_value_from":"attribute",
+"get_value_from_attribute_name":"content"
+},
+{
+"description":"Описание страницы (description)",
+"search_by_tag_name":"meta",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"name",
+"search_by_tag_attribute_value":"description",
+"type_get_value_from":"attribute",
+"get_value_from_attribute_name":"content"
+},
+{
+"description":"Заголовок документа (title)",
+"search_by_tag_name":"title",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"",
+"search_by_tag_attribute_value":"",
+"type_get_value_from":"tag",
+"get_value_from_attribute_name":""
+},
+{
+"description":"Заголовок на странице (h1)",
+"search_by_tag_name":"h1",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"",
+"search_by_tag_attribute_value":"",
+"type_get_value_from":"tag",
+"get_value_from_attribute_name":""
+},
+{
+"description":"Заголовок на странице (h2)",
+"search_by_tag_name":"h2",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"",
+"search_by_tag_attribute_value":"",
+"type_get_value_from":"tag",
+"get_value_from_attribute_name":""
+},
+{
+"description":"Заголовок на странице (h3)",
+"search_by_tag_name":"h3",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"",
+"search_by_tag_attribute_value":"",
+"type_get_value_from":"tag",
+"get_value_from_attribute_name":""
+},
+{
+"description":"Заголовок на странице (h4)",
+"search_by_tag_name":"h4",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"",
+"search_by_tag_attribute_value":"",
+"type_get_value_from":"tag",
+"get_value_from_attribute_name":""
+},
+{
+"description":"Заголовок на странице (h5)",
+"search_by_tag_name":"h5",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"",
+"search_by_tag_attribute_value":"",
+"type_get_value_from":"tag",
+"get_value_from_attribute_name":""
+},
+{
+"description":"Заголовок на странице (h6)",
+"search_by_tag_name":"h6",
+"search_by_tag_id":"",
+"search_by_tag_attribute":"",
+"search_by_tag_attribute_value":"",
+"type_get_value_from":"tag",
+"get_value_from_attribute_name":""
+}
+]
+}
