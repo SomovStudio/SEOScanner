@@ -567,6 +567,7 @@ namespace SEOScanner
             thread.Start();
         }
 
+        
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (webBrowser1.ReadyState != WebBrowserReadyState.Complete) return;
@@ -635,6 +636,177 @@ namespace SEOScanner
                 thread.Start();
             }
             
+        }
+
+        private void копироватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxListLinks.Copy();
+        }
+
+        private void вставитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxListLinks.Paste();
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxListLinks.Clear();
+        }
+
+        private void выделитьВсёToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxListLinks.SelectAll();
+        }
+
+        private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxListLinks.Clear();
+        }
+
+        private void отменитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxListLinks.Undo();
+        }
+
+        private void вырезатьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxListLinks.Cut();
+        }
+
+        private void очиститьToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            consoleRichTextBox.Clear();
+        }
+
+        
+        private void очиститьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            reportRichTextBox.Clear();
+        }
+
+        private void открытьSitemapФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                toolStripComboBoxPath.Text = openFileDialog1.FileName;
+            }
+        }
+
+        
+        private void сохранитьОтчетКакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.FileName = "";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    reportRichTextBox.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                    if (File.Exists(saveFileDialog1.FileName)) addConsoleMessage("Отчет успешно сохранён в файл " + saveFileDialog1.FileName);
+                    else addConsoleMessage("Ошибка: Отчет не удалось сохранить в файл " + saveFileDialog1.FileName);
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+                addConsoleMessage("Ошибка: " + error.Message);
+            }
+        }
+
+        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void загрузитьСсылкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (thread.ThreadState.ToString() == "Running")
+            {
+                MessageBox.Show("Процесс занят! Дождитесь завершения или прекратите текущий процесс вручную.");
+                return;
+            }
+            richTextBoxListLinks.Clear();
+            thread = new Thread(loadSitemap);
+            thread.Start();
+        }
+
+        
+        private void запуститьСканерToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (thread.ThreadState.ToString() == "Running")
+            {
+                MessageBox.Show("Процесс занят! Дождитесь завершения или прекратите текущий процесс вручную.");
+                return;
+            }
+            if (richTextBoxListLinks.Lines.Length <= 0)
+            {
+                MessageBox.Show("Список ссылок пустой, невозможно запустить сканирование");
+                return;
+            }
+
+            steps = richTextBoxListLinks.Lines.Length;
+            step = 0;
+            percent = 0;
+
+            toolStripStatusLabelProcessPercent.Text = "...";
+            toolStripProgressBar1.Value = step;
+            toolStripProgressBar1.Maximum = steps;
+            toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
+            listView1.Items.Clear();
+            reportRichTextBox.Text = "";
+
+            webBrowser1.ScriptErrorsSuppressed = true;
+
+            thread = new Thread(runScanner);
+            thread.Start();
+        }
+
+        private void остановитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            stopProcess();
+        }
+
+        
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 about = new Form3();
+            about.ShowDialog();
+        }
+
+        private void richTextBoxListLinks_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@e.LinkText);
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
+        private void consoleRichTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@e.LinkText);
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
+        private void reportRichTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@e.LinkText);
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
         }
     }
 }
