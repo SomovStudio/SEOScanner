@@ -6,7 +6,7 @@
 <hr>
 
 <p align="center">
-  <img src="https://github.com/SomovStudio/somovstudio.github.io/blob/master/img/projects/seo_scanner/SeoScanner.png">
+  <img src="https://github.com/SomovStudio/somovstudio.github.io/blob/master/img/projects/seo_scanner/seo_scanner.png">
 </p>
 
 Системные требования: 
