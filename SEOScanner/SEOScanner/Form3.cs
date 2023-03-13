@@ -17,16 +17,10 @@ namespace SEOScanner
             InitializeComponent();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        
+        private void Form3_Load(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start(@"https://www.gnu.org/licenses/gpl-3.0.en.html");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка");
-            }
+
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -46,6 +40,30 @@ namespace SEOScanner
             try
             {
                 System.Diagnostics.Process.Start(@"https://somovstudio.github.io/");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"https://github.com/SomovStudio/SearchSiteContent/blob/main/LICENSE");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"https://zionec.ru/");
             }
             catch (Exception ex)
             {

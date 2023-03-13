@@ -882,6 +882,12 @@ namespace SEOScanner
             openSitemapFile();
         }
 
+        private void toolStripButton14_Click(object sender, EventArgs e)
+        {
+            Form3 about = new Form3();
+            about.ShowDialog();
+        }
+
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked) addConsoleMessage("Способ отображения страниц - только HTML (по умолчанию)");
