@@ -6,10 +6,12 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace SEOScanner
 {
@@ -143,70 +145,89 @@ namespace SEOScanner
             }
         }
 
-        /* Загрузка ссылок из карты сайта */
+        private ArrayList readXML(string filename)
+        {
+            ArrayList list = new ArrayList();
+
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+            XmlDocument xDoc;
+            if (checkBoxUserAgent.Checked == false)
+            {
+                WebClient client = new WebClient();
+                client.Headers["User-Agent"] = textBoxUserAgent.Text;
+                client.Headers["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                string data = client.DownloadString(filename);
+
+                xDoc = new XmlDocument();
+                xDoc.LoadXml(data);
+            }
+            else
+            {
+                xDoc = new XmlDocument();
+                xDoc.Load(filename);
+            }
+
+            XmlElement xRoot = xDoc.DocumentElement;
+            foreach (XmlNode xnode in xRoot)
+            {
+                for (int j = 0; j <= xnode.ChildNodes.Count; j++)
+                {
+                    if (xnode.ChildNodes[j].Name == "loc")
+                    {
+                        string xmlLink = xnode.ChildNodes[j].InnerText;
+                        list.Add(xmlLink);
+                        break;
+                    }
+                }
+            }
+
+            return list;
+        }
+
         private void loadSitemap()
         {
             try
             {
-                string sitemapPath = toolStripComboBoxPath.Text;
-                ArrayList targets;
-                ArrayList sitemaps;
-                sitemaps = new ArrayList();
-                targets = new ArrayList();
+                ArrayList sitemaps = new ArrayList();
+                string urlSitemap = "";
 
                 /* собираю все sitemap */
-                sitemaps.Add(sitemapPath);
+                sitemaps.Add(toolStripTextBoxPath.Text);
                 for (int i = 0; i < sitemaps.Count; i++)
                 {
                     string xmlLink = sitemaps[i].ToString();
-                    addConsoleMessage("Чтение данных из сайтмап: " + xmlLink);
                     if (xmlLink.Contains(".xml") == true)
                     {
-                        ArrayList listSitemaps;
-                        if (checkBoxUserAgent.Checked == false) listSitemaps = Sitemap.readXML(xmlLink, textBoxUserAgent.Text);
-                        else listSitemaps = Sitemap.readXML(xmlLink, "");
-
-                        foreach (string urlSitemap in listSitemaps)
+                        ArrayList listSitemaps = readXML(xmlLink);
+                        for (int j = 0; j < listSitemaps.Count; j++)
                         {
+                            urlSitemap = "";
+                            urlSitemap = (string)listSitemaps[j];
                             if (urlSitemap.Contains(".xml") == true)
                             {
                                 sitemaps.Add(urlSitemap);
                             }
                             else
                             {
-                                targets.Add(urlSitemap);
+                                richTextBoxListLinks.Text += urlSitemap;
+                                if (j != (listSitemaps.Count - 1)) richTextBoxListLinks.Text += Environment.NewLine;
+                                richTextBoxListLinks.Update();
                             }
                         }
                     }
                 }
-
-                addConsoleMessage("Было прочитано: " + sitemaps.Count.ToString() + " xml файлов (sitemap)");
-                addConsoleMessage("Было получено " + targets.Count.ToString() + " ссылок");
-
-                int index = 1;
-                int amount = targets.Count;
-                foreach (string target in targets)
-                {
-                    richTextBoxListLinks.Text = target + Environment.NewLine + richTextBoxListLinks.Text;
-                    richTextBoxListLinks.Update();
-                    label4.Text = "Загружено " + index.ToString() + " / " + amount.ToString() + " ссылок";
-                    index++;
-                }
-
-                addConsoleMessage("Выгрузка ссылок из sitemap - завершена");
+                addConsoleMessage("Загрузка ссылок завершена");
+                MessageBox.Show("Загрузка ссылок завершена", "Сообщение");
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                addConsoleMessage("Сообщение: " + error.Message);
+                addConsoleMessage("Ошибка: " + ex.Message);
+                MessageBox.Show(ex.Message, "Ошибка");
             }
-            finally
-            {
-                thread.Abort();
-                addConsoleMessage("Процесс завершен");
-                MessageBox.Show("Процесс завершен!");
-            }
-
-            thread.Abort();
+            panelMessageLoadLinks.Visible = false;
         }
 
         private void runScanner()
@@ -387,23 +408,12 @@ namespace SEOScanner
         }
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            if (thread.ThreadState.ToString() == "Running")
-            {
-                MessageBox.Show("Процесс занят! Дождитесь завершения или прекратите текущий процесс вручную.");
-                return;
-            }
-            richTextBoxListLinks.Clear();
-            thread = new Thread(loadSitemap);
-            thread.Start();
+            
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.FileName = "";
-            if(openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                toolStripComboBoxPath.Text = openFileDialog1.FileName;
-            }
+            
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
@@ -692,11 +702,7 @@ namespace SEOScanner
 
         private void открытьSitemapФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.FileName = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                toolStripComboBoxPath.Text = openFileDialog1.FileName;
-            }
+            
         }
 
         
@@ -813,6 +819,67 @@ namespace SEOScanner
             {
                 addConsoleMessage("Ошибка: " + ex.Message);
             }
+        }
+
+        private void openSitemapFile()
+        {
+            if (thread.ThreadState.ToString() == "Running")
+            {
+                MessageBox.Show("Загрузка ссылок в процессе, пожалуйста подождите.", "Сообщение");
+                addConsoleMessage("Загрузка ссылок в процессе, пожалуйста подождите.");
+                return;
+            }
+
+            openFileDialog1.FileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBoxListLinks.Clear();
+                toolStripTextBoxPath.Text = openFileDialog1.FileName;
+                thread = new Thread(loadSitemap);
+                thread.Start();
+                panelMessageLoadLinks.Visible = true;
+            }
+        }
+
+        private void loadSitemapUrl()
+        {
+            if (thread.ThreadState.ToString() == "Running")
+            {
+                MessageBox.Show("Загрузка ссылок в процессе, пожалуйста подождите.", "Сообщение");
+                addConsoleMessage("Загрузка ссылок в процессе, пожалуйста подождите.");
+                return;
+            }
+
+            FormInputBox inputBox = new FormInputBox();
+            inputBox.FormClosed += InputBox_FormClosed;
+            inputBox.Parent = this;
+            inputBox.ShowDialog();
+        }
+
+        private void InputBox_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (toolStripTextBoxPath.Text != "")
+            {
+                richTextBoxListLinks.Clear();
+                thread = new Thread(loadSitemap);
+                thread.Start();
+                panelMessageLoadLinks.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("Вы не ввели URL ссылку к карте сайта.", "Сообщение");
+                addConsoleMessage("Вы не ввели URL ссылку к карте сайта.");
+            }
+        }
+
+        private void toolStripButton11_Click(object sender, EventArgs e)
+        {
+            loadSitemapUrl();
+        }
+
+        private void toolStripButton12_Click(object sender, EventArgs e)
+        {
+            openSitemapFile();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
