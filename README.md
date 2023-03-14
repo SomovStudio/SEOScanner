@@ -1,7 +1,7 @@
 # SEOScanner
 Программа сканирования web страниц для проведения SEO-аудита.
 <br>
-Скачать архив: https://github.com/SomovStudio/SEOScanner/archive/refs/tags/v1.1.zip
+Скачать: https://github.com/SomovStudio/SEOScanner/releases/download/1.1/SEOScanner-1.1.zip
 
 <hr>
 
