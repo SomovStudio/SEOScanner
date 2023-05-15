@@ -120,6 +120,16 @@
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel21 = new System.Windows.Forms.Panel();
+            this.reportFailedRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel13 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -147,16 +157,8 @@
             this.checkBoxUserAgent = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.reportFailedRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.открытьЗаписьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -190,6 +192,11 @@
             this.panel18.SuspendLayout();
             this.contextMenuStrip3.SuspendLayout();
             this.toolStrip4.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel19.SuspendLayout();
+            this.panel21.SuspendLayout();
+            this.contextMenuStrip4.SuspendLayout();
+            this.toolStrip5.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -197,11 +204,7 @@
             this.toolStrip2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.panel19.SuspendLayout();
-            this.panel21.SuspendLayout();
-            this.toolStrip5.SuspendLayout();
-            this.contextMenuStrip4.SuspendLayout();
+            this.contextMenuStrip5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -576,7 +579,7 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(192, 55);
             this.label17.TabIndex = 0;
-            this.label17.Text = "Идет загрузка ссылока, подождите пожалуйста...";
+            this.label17.Text = "Идет загрузка ссылок, подождите пожалуйста...";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // richTextBoxListLinks
@@ -877,6 +880,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.listView1.ContextMenuStrip = this.contextMenuStrip5;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
@@ -1073,6 +1077,112 @@
             this.toolStripButton10.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton10.Text = "Сохранить отчет как";
             this.toolStripButton10.Click += new System.EventHandler(this.toolStripButton10_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.panel19);
+            this.tabPage2.Controls.Add(this.panel21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1000, 296);
+            this.tabPage2.TabIndex = 5;
+            this.tabPage2.Text = "Отчет (некорректные страницы)";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel19
+            // 
+            this.panel19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel19.Controls.Add(this.panel20);
+            this.panel19.Controls.Add(this.label8);
+            this.panel19.Location = new System.Drawing.Point(0, 0);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(1000, 18);
+            this.panel19.TabIndex = 5;
+            // 
+            // panel20
+            // 
+            this.panel20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel20.BackColor = System.Drawing.Color.Firebrick;
+            this.panel20.Location = new System.Drawing.Point(0, 16);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(1000, 2);
+            this.panel20.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.Firebrick;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(174, 18);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Некорректные страницы:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel21
+            // 
+            this.panel21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel21.Controls.Add(this.reportFailedRichTextBox);
+            this.panel21.Controls.Add(this.toolStrip5);
+            this.panel21.Location = new System.Drawing.Point(0, 17);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(1000, 279);
+            this.panel21.TabIndex = 6;
+            // 
+            // reportFailedRichTextBox
+            // 
+            this.reportFailedRichTextBox.BackColor = System.Drawing.Color.White;
+            this.reportFailedRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.reportFailedRichTextBox.ContextMenuStrip = this.contextMenuStrip4;
+            this.reportFailedRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportFailedRichTextBox.Location = new System.Drawing.Point(0, 25);
+            this.reportFailedRichTextBox.Name = "reportFailedRichTextBox";
+            this.reportFailedRichTextBox.ReadOnly = true;
+            this.reportFailedRichTextBox.Size = new System.Drawing.Size(998, 252);
+            this.reportFailedRichTextBox.TabIndex = 0;
+            this.reportFailedRichTextBox.Text = "";
+            // 
+            // contextMenuStrip4
+            // 
+            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip4.Name = "contextMenuStrip3";
+            this.contextMenuStrip4.Size = new System.Drawing.Size(127, 26);
+            this.contextMenuStrip4.Text = "Очистить";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
+            this.toolStripMenuItem1.Text = "Очистить";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStrip5
+            // 
+            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton2});
+            this.toolStrip5.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip5.Name = "toolStrip5";
+            this.toolStrip5.Size = new System.Drawing.Size(998, 25);
+            this.toolStrip5.TabIndex = 1;
+            this.toolStrip5.Text = "toolStrip5";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "Сохранить отчет как";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click_1);
             // 
             // tabPage5
             // 
@@ -1343,111 +1453,19 @@
             // 
             this.saveFileDialog1.Filter = "*.txt|*.txt";
             // 
-            // tabPage2
+            // contextMenuStrip5
             // 
-            this.tabPage2.Controls.Add(this.panel19);
-            this.tabPage2.Controls.Add(this.panel21);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1000, 296);
-            this.tabPage2.TabIndex = 5;
-            this.tabPage2.Text = "Отчет (некорректные страницы)";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.contextMenuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.открытьЗаписьToolStripMenuItem});
+            this.contextMenuStrip5.Name = "contextMenuStrip5";
+            this.contextMenuStrip5.Size = new System.Drawing.Size(162, 26);
             // 
-            // panel19
+            // открытьЗаписьToolStripMenuItem
             // 
-            this.panel19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel19.Controls.Add(this.panel20);
-            this.panel19.Controls.Add(this.label8);
-            this.panel19.Location = new System.Drawing.Point(0, 0);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(1000, 18);
-            this.panel19.TabIndex = 5;
-            // 
-            // panel20
-            // 
-            this.panel20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel20.BackColor = System.Drawing.Color.Firebrick;
-            this.panel20.Location = new System.Drawing.Point(0, 16);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(1000, 2);
-            this.panel20.TabIndex = 1;
-            // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.Firebrick;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(0, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(174, 18);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Некорректные страницы:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel21
-            // 
-            this.panel21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel21.Controls.Add(this.reportFailedRichTextBox);
-            this.panel21.Controls.Add(this.toolStrip5);
-            this.panel21.Location = new System.Drawing.Point(0, 17);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(1000, 279);
-            this.panel21.TabIndex = 6;
-            // 
-            // reportFailedRichTextBox
-            // 
-            this.reportFailedRichTextBox.BackColor = System.Drawing.Color.White;
-            this.reportFailedRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.reportFailedRichTextBox.ContextMenuStrip = this.contextMenuStrip4;
-            this.reportFailedRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportFailedRichTextBox.Location = new System.Drawing.Point(0, 25);
-            this.reportFailedRichTextBox.Name = "reportFailedRichTextBox";
-            this.reportFailedRichTextBox.ReadOnly = true;
-            this.reportFailedRichTextBox.Size = new System.Drawing.Size(998, 252);
-            this.reportFailedRichTextBox.TabIndex = 0;
-            this.reportFailedRichTextBox.Text = "";
-            // 
-            // toolStrip5
-            // 
-            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton2});
-            this.toolStrip5.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip5.Name = "toolStrip5";
-            this.toolStrip5.Size = new System.Drawing.Size(998, 25);
-            this.toolStrip5.TabIndex = 1;
-            this.toolStrip5.Text = "toolStrip5";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "Сохранить отчет как";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click_1);
-            // 
-            // contextMenuStrip4
-            // 
-            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip4.Name = "contextMenuStrip3";
-            this.contextMenuStrip4.Size = new System.Drawing.Size(127, 26);
-            this.contextMenuStrip4.Text = "Очистить";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "Очистить";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.открытьЗаписьToolStripMenuItem.Name = "открытьЗаписьToolStripMenuItem";
+            this.открытьЗаписьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.открытьЗаписьToolStripMenuItem.Text = "Открыть запись";
+            this.открытьЗаписьToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаписьToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1503,6 +1521,13 @@
             this.contextMenuStrip3.ResumeLayout(false);
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            this.panel21.ResumeLayout(false);
+            this.panel21.PerformLayout();
+            this.contextMenuStrip4.ResumeLayout(false);
+            this.toolStrip5.ResumeLayout(false);
+            this.toolStrip5.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
@@ -1514,13 +1539,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.panel19.ResumeLayout(false);
-            this.panel21.ResumeLayout(false);
-            this.panel21.PerformLayout();
-            this.toolStrip5.ResumeLayout(false);
-            this.toolStrip5.PerformLayout();
-            this.contextMenuStrip4.ResumeLayout(false);
+            this.contextMenuStrip5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1655,6 +1674,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip5;
+        private System.Windows.Forms.ToolStripMenuItem открытьЗаписьToolStripMenuItem;
     }
 }
 
