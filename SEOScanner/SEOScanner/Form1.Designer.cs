@@ -103,6 +103,8 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.открытьЗаписьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
@@ -157,8 +159,6 @@
             this.checkBoxUserAgent = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.открытьЗаписьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -186,6 +186,7 @@
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.contextMenuStrip5.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -204,7 +205,6 @@
             this.toolStrip2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.contextMenuStrip5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -914,6 +914,20 @@
             this.columnHeader4.Text = "Значение";
             this.columnHeader4.Width = 500;
             // 
+            // contextMenuStrip5
+            // 
+            this.contextMenuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.открытьЗаписьToolStripMenuItem});
+            this.contextMenuStrip5.Name = "contextMenuStrip5";
+            this.contextMenuStrip5.Size = new System.Drawing.Size(162, 26);
+            // 
+            // открытьЗаписьToolStripMenuItem
+            // 
+            this.открытьЗаписьToolStripMenuItem.Name = "открытьЗаписьToolStripMenuItem";
+            this.открытьЗаписьToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.открытьЗаписьToolStripMenuItem.Text = "Открыть запись";
+            this.открытьЗаписьToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаписьToolStripMenuItem_Click);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -1148,6 +1162,7 @@
             this.reportFailedRichTextBox.Size = new System.Drawing.Size(998, 252);
             this.reportFailedRichTextBox.TabIndex = 0;
             this.reportFailedRichTextBox.Text = "";
+            this.reportFailedRichTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.reportFailedRichTextBox_LinkClicked);
             // 
             // contextMenuStrip4
             // 
@@ -1453,20 +1468,6 @@
             // 
             this.saveFileDialog1.Filter = "*.txt|*.txt";
             // 
-            // contextMenuStrip5
-            // 
-            this.contextMenuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.открытьЗаписьToolStripMenuItem});
-            this.contextMenuStrip5.Name = "contextMenuStrip5";
-            this.contextMenuStrip5.Size = new System.Drawing.Size(162, 26);
-            // 
-            // открытьЗаписьToolStripMenuItem
-            // 
-            this.открытьЗаписьToolStripMenuItem.Name = "открытьЗаписьToolStripMenuItem";
-            this.открытьЗаписьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.открытьЗаписьToolStripMenuItem.Text = "Открыть запись";
-            this.открытьЗаписьToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаписьToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1512,6 +1513,7 @@
             this.panel6.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.contextMenuStrip5.ResumeLayout(false);
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             this.tabPage6.ResumeLayout(false);
@@ -1539,7 +1541,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.contextMenuStrip5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

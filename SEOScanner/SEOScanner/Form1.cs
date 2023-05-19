@@ -590,7 +590,17 @@ namespace SEOScanner
             thread.Start();
         }
 
-        
+        string _description;                      // краткое описание
+        string _search_by_tag_name;               // значение поиска - имя тега
+        string _search_by_tag_id;                 // значение поиска - идентификатор
+        string _search_by_tag_attribute;          // значение поиска - имя аттрибута
+        string _search_by_tag_attribute_value;    // значение поиска - значение в аттрибуте
+        string _type_get_value_from;              // получить значение из
+        string _get_value_from_attribute_name;    // имя аттрибута
+        bool failed;                              // статус
+        int amountItems;                          // количество строк
+        ArrayList values;                         // список значений
+
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (webBrowser1.ReadyState != WebBrowserReadyState.Complete) return;
@@ -601,16 +611,8 @@ namespace SEOScanner
             webBrowser1.Update();
             HtmlDOM.document = webBrowser1.Document;
 
-            string _description;                      // краткое описание
-            string _search_by_tag_name;               // значение поиска - имя тега
-            string _search_by_tag_id;                 // значение поиска - идентификатор
-            string _search_by_tag_attribute;          // значение поиска - имя аттрибута
-            string _search_by_tag_attribute_value;    // значение поиска - значение в аттрибуте
-            string _type_get_value_from;              // получить значение из
-            string _get_value_from_attribute_name;    // имя аттрибута
-
-            bool failed = false;
-            int amountItems = listView2.Items.Count;
+            failed = false;
+            amountItems = listView2.Items.Count;
             for (int i = 0; i < amountItems; i++)
             {
                 _description = listView2.Items[i].SubItems[1].Text;
@@ -621,7 +623,7 @@ namespace SEOScanner
                 _type_get_value_from = listView2.Items[i].SubItems[6].Text;
                 _get_value_from_attribute_name = listView2.Items[i].SubItems[7].Text;
 
-                ArrayList values = new ArrayList();
+                values = new ArrayList();
                 values = HtmlDOM.getValues(_search_by_tag_name, _search_by_tag_id, _search_by_tag_attribute,
                     _search_by_tag_attribute_value, _type_get_value_from, _get_value_from_attribute_name);
                 
@@ -928,6 +930,18 @@ namespace SEOScanner
         private void открытьЗаписьToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void reportFailedRichTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@e.LinkText);
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
