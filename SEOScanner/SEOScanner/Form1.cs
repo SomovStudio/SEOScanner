@@ -929,7 +929,18 @@ namespace SEOScanner
 
         private void открытьЗаписьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                FormResultItem item = new FormResultItem();
+                item.PageRichTextBox.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                item.ObjectRichTextBox.Text = listView1.SelectedItems[0].SubItems[2].Text;
+                item.ValueRichTextBox.Text = listView1.SelectedItems[0].SubItems[3].Text;
+                item.Show();
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
         }
 
         private void reportFailedRichTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -942,6 +953,11 @@ namespace SEOScanner
             {
                 addConsoleMessage("Ошибка: " + ex.Message);
             }
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
