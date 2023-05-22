@@ -98,6 +98,12 @@ namespace SEOScanner
             reportRichTextBox.Update();
         }
 
+        private void addReportMessageFailed(string message)
+        {
+            reportFailedRichTextBox.Text = reportFailedRichTextBox.Text + Environment.NewLine + message;
+            reportFailedRichTextBox.Update();
+        }
+
         private const string BLUE = "blue";
         private const string YELLOW = "yellow";
         private const string RED = "red";
@@ -576,6 +582,7 @@ namespace SEOScanner
             toolStripStatusLabelProcessPercent.Text = Convert.ToString(percent) + "%";
             listView1.Items.Clear();
             reportRichTextBox.Text = "";
+            reportFailedRichTextBox.Text = "";
 
             webBrowser1.ScriptErrorsSuppressed = true;
             
@@ -583,7 +590,17 @@ namespace SEOScanner
             thread.Start();
         }
 
-        
+        string _description;                      // краткое описание
+        string _search_by_tag_name;               // значение поиска - имя тега
+        string _search_by_tag_id;                 // значение поиска - идентификатор
+        string _search_by_tag_attribute;          // значение поиска - имя аттрибута
+        string _search_by_tag_attribute_value;    // значение поиска - значение в аттрибуте
+        string _type_get_value_from;              // получить значение из
+        string _get_value_from_attribute_name;    // имя аттрибута
+        bool failed;                              // статус
+        int amountItems;                          // количество строк
+        ArrayList values;                         // список значений
+
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (webBrowser1.ReadyState != WebBrowserReadyState.Complete) return;
@@ -594,15 +611,8 @@ namespace SEOScanner
             webBrowser1.Update();
             HtmlDOM.document = webBrowser1.Document;
 
-            string _description;                      // краткое описание
-            string _search_by_tag_name;               // значение поиска - имя тега
-            string _search_by_tag_id;                 // значение поиска - идентификатор
-            string _search_by_tag_attribute;          // значение поиска - имя аттрибута
-            string _search_by_tag_attribute_value;    // значение поиска - значение в аттрибуте
-            string _type_get_value_from;              // получить значение из
-            string _get_value_from_attribute_name;    // имя аттрибута
-
-            int amountItems = listView2.Items.Count;
+            failed = false;
+            amountItems = listView2.Items.Count;
             for (int i = 0; i < amountItems; i++)
             {
                 _description = listView2.Items[i].SubItems[1].Text;
@@ -613,7 +623,7 @@ namespace SEOScanner
                 _type_get_value_from = listView2.Items[i].SubItems[6].Text;
                 _get_value_from_attribute_name = listView2.Items[i].SubItems[7].Text;
 
-                ArrayList values = new ArrayList();
+                values = new ArrayList();
                 values = HtmlDOM.getValues(_search_by_tag_name, _search_by_tag_id, _search_by_tag_attribute,
                     _search_by_tag_attribute_value, _type_get_value_from, _get_value_from_attribute_name);
                 
@@ -623,18 +633,23 @@ namespace SEOScanner
                     {
                         //addReportMessage(_description + " | Тег: " + _search_by_tag_name + " " + _search_by_tag_id + " | Аттрибут: " + _search_by_tag_attribute + " " + _search_by_tag_attribute_value + " | Тип: " + _type_get_value_from + " " + _get_value_from_attribute_name + " | Значение: " + value);
                         addReportMessage(_description + ": " + value);
-                        if(value != "" && value != null) addItemInTableReport(BLUE, "", _description, value);
-                        else addItemInTableReport(YELLOW, "", _description, "");
+                        if (value != "" && value != null) addItemInTableReport(BLUE, "", _description, value);
+                        else
+                        {
+                            failed = true;
+                            addItemInTableReport(YELLOW, "", _description, "");
+                        }
                     }
                 }
                 else
                 {
+                    failed = true;
                     addReportMessage(_description + ":");
                     addItemInTableReport(YELLOW, "", _description, "");
                 }
             }
             addReportMessage("");
-
+            if (failed == true) addReportMessageFailed(currentURL);
 
             toolStripProgressBar1.Value = step;
             percent = (int)(((double)toolStripProgressBar1.Value / (double)toolStripProgressBar1.Maximum) * 100);
@@ -886,6 +901,63 @@ namespace SEOScanner
         {
             Form3 about = new Form3();
             about.ShowDialog();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            reportFailedRichTextBox.Clear();
+        }
+
+        private void toolStripButton2_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.FileName = "";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    reportFailedRichTextBox.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                    if (File.Exists(saveFileDialog1.FileName)) addConsoleMessage("Отчет успешно сохранён в файл " + saveFileDialog1.FileName);
+                    else addConsoleMessage("Ошибка: Отчет не удалось сохранить в файл " + saveFileDialog1.FileName);
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+                addConsoleMessage("Ошибка: " + error.Message);
+            }
+        }
+
+        private void открытьЗаписьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormResultItem item = new FormResultItem();
+                item.PageRichTextBox.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                item.ObjectTextBox.Text = listView1.SelectedItems[0].SubItems[2].Text;
+                item.ValueTextBox.Text = listView1.SelectedItems[0].SubItems[3].Text;
+                item.Show();
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
+        private void reportFailedRichTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@e.LinkText);
+            }
+            catch (Exception ex)
+            {
+                addConsoleMessage("Ошибка: " + ex.Message);
+            }
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
