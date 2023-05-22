@@ -29,142 +29,169 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormResultItem));
-            this.label1 = new System.Windows.Forms.Label();
             this.PageRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ObjectRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.ValueRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ObjectTextBox = new System.Windows.Forms.TextBox();
+            this.ValueTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(581, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Страница:";
             // 
             // PageRichTextBox
             // 
             this.PageRichTextBox.BackColor = System.Drawing.Color.White;
+            this.PageRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PageRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PageRichTextBox.Location = new System.Drawing.Point(0, 13);
+            this.PageRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.PageRichTextBox.Name = "PageRichTextBox";
             this.PageRichTextBox.ReadOnly = true;
-            this.PageRichTextBox.Size = new System.Drawing.Size(581, 96);
+            this.PageRichTextBox.Size = new System.Drawing.Size(571, 107);
             this.PageRichTextBox.TabIndex = 1;
             this.PageRichTextBox.Text = "";
             this.PageRichTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.pageRichTextBox_LinkClicked);
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.PageRichTextBox);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(4, 18);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(581, 109);
+            this.panel1.Size = new System.Drawing.Size(573, 109);
             this.panel1.TabIndex = 2;
             // 
-            // splitContainer1
+            // panel10
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 109);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel10.Controls.Add(this.panel11);
+            this.panel10.Controls.Add(this.label5);
+            this.panel10.Location = new System.Drawing.Point(4, 1);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(573, 18);
+            this.panel10.TabIndex = 6;
             // 
-            // splitContainer1.Panel1
+            // panel11
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.ObjectRichTextBox);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel11.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel11.Location = new System.Drawing.Point(0, 16);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(573, 2);
+            this.panel11.TabIndex = 1;
             // 
-            // splitContainer1.Panel2
+            // label5
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.ValueRichTextBox);
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Size = new System.Drawing.Size(581, 267);
-            this.splitContainer1.SplitterDistance = 123;
-            this.splitContainer1.TabIndex = 3;
+            this.label5.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(150, 18);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Страница:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label2
+            // tabControl1
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(581, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Объект:";
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(4, 133);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(573, 240);
+            this.tabControl1.TabIndex = 7;
             // 
-            // label3
+            // tabPage1
             // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(581, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Значение:";
+            this.tabPage1.Controls.Add(this.ObjectTextBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(565, 214);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Объект";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // ObjectRichTextBox
+            // tabPage2
             // 
-            this.ObjectRichTextBox.BackColor = System.Drawing.Color.White;
-            this.ObjectRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ObjectRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ObjectRichTextBox.Location = new System.Drawing.Point(0, 13);
-            this.ObjectRichTextBox.Name = "ObjectRichTextBox";
-            this.ObjectRichTextBox.ReadOnly = true;
-            this.ObjectRichTextBox.Size = new System.Drawing.Size(581, 110);
-            this.ObjectRichTextBox.TabIndex = 2;
-            this.ObjectRichTextBox.Text = "";
+            this.tabPage2.Controls.Add(this.ValueTextBox);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(562, 214);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Значение";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // ValueRichTextBox
+            // ObjectTextBox
             // 
-            this.ValueRichTextBox.BackColor = System.Drawing.Color.White;
-            this.ValueRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ValueRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ValueRichTextBox.Location = new System.Drawing.Point(0, 13);
-            this.ValueRichTextBox.Name = "ValueRichTextBox";
-            this.ValueRichTextBox.ReadOnly = true;
-            this.ValueRichTextBox.Size = new System.Drawing.Size(581, 127);
-            this.ValueRichTextBox.TabIndex = 2;
-            this.ValueRichTextBox.Text = "";
+            this.ObjectTextBox.BackColor = System.Drawing.Color.White;
+            this.ObjectTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ObjectTextBox.Location = new System.Drawing.Point(3, 3);
+            this.ObjectTextBox.Multiline = true;
+            this.ObjectTextBox.Name = "ObjectTextBox";
+            this.ObjectTextBox.ReadOnly = true;
+            this.ObjectTextBox.Size = new System.Drawing.Size(559, 208);
+            this.ObjectTextBox.TabIndex = 0;
+            // 
+            // ValueTextBox
+            // 
+            this.ValueTextBox.BackColor = System.Drawing.Color.White;
+            this.ValueTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ValueTextBox.Location = new System.Drawing.Point(3, 3);
+            this.ValueTextBox.Multiline = true;
+            this.ValueTextBox.Name = "ValueTextBox";
+            this.ValueTextBox.ReadOnly = true;
+            this.ValueTextBox.Size = new System.Drawing.Size(556, 208);
+            this.ValueTextBox.TabIndex = 1;
             // 
             // FormResultItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 376);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(584, 376);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.panel10);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormResultItem";
-            this.Text = "Информация из строки в таблице результатов";
+            this.Text = "Запись";
             this.panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         public System.Windows.Forms.RichTextBox PageRichTextBox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        public System.Windows.Forms.RichTextBox ObjectRichTextBox;
-        private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.RichTextBox ValueRichTextBox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        public System.Windows.Forms.TextBox ObjectTextBox;
+        public System.Windows.Forms.TextBox ValueTextBox;
     }
 }

@@ -933,8 +933,8 @@ namespace SEOScanner
             {
                 FormResultItem item = new FormResultItem();
                 item.PageRichTextBox.Text = listView1.SelectedItems[0].SubItems[1].Text;
-                item.ObjectRichTextBox.Text = listView1.SelectedItems[0].SubItems[2].Text;
-                item.ValueRichTextBox.Text = listView1.SelectedItems[0].SubItems[3].Text;
+                item.ObjectTextBox.Text = listView1.SelectedItems[0].SubItems[2].Text;
+                item.ValueTextBox.Text = listView1.SelectedItems[0].SubItems[3].Text;
                 item.Show();
             }
             catch (Exception ex)
