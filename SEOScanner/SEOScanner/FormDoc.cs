@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71150,6 +71151,24 @@ f0f0f0f0f0f0f0f0f0f0f0f00000030000000000
         private void FormDoc_Load(object sender, EventArgs e)
         {
             richTextBox1.Rtf = contentRTF;
+        }
+
+        private void сохранитьДокументКакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.FileName = "";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                    if (File.Exists(saveFileDialog1.FileName)) MessageBox.Show("Документ успешно сохранён", "Сообщение");
+                    else MessageBox.Show("Не удалось сохранить документ по адресу " + saveFileDialog1.FileName, "Ошибка");
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Ошибка");
+            }
         }
     }
 }
