@@ -216,9 +216,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(269, 14);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(150, 13);
+            this.label7.Size = new System.Drawing.Size(156, 13);
             this.label7.TabIndex = 11;
-            this.label7.Text = "Дата обновления: 6.09.2023";
+            this.label7.Text = "Дата обновления: 08.08.2024";
             // 
             // label6
             // 
@@ -228,7 +228,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Версия: 1.3";
+            this.label6.Text = "Версия: 1.4";
             // 
             // linkLabel1
             // 
@@ -280,7 +280,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "О программе SEO Scanner | Copyright © 2023 Somov Studio. All Rights Reserved.";
+            this.Text = "О программе SEO Scanner | Copyright © 2024 Somov Studio. All Rights Reserved.";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

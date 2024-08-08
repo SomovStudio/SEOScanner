@@ -803,7 +803,7 @@ namespace SEOScanner
 
         private void открытьSitemapФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            openSitemapFile();
         }
 
         
