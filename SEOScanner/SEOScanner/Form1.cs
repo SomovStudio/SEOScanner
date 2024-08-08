@@ -803,7 +803,7 @@ namespace SEOScanner
 
         private void открытьSitemapФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            openSitemapFile();
         }
 
         
@@ -1044,6 +1044,12 @@ namespace SEOScanner
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
             
+        }
+
+        private void docsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDoc doc = new FormDoc();
+            doc.Show();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
