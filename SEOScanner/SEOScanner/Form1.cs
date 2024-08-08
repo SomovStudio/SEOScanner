@@ -1046,6 +1046,12 @@ namespace SEOScanner
             
         }
 
+        private void docsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDoc doc = new FormDoc();
+            doc.Show();
+        }
+
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked) addConsoleMessage("Способ отображения страниц - только HTML (по умолчанию)");
